@@ -1,0 +1,37 @@
+.top-block1 
+{
+    height: 500px;
+    background-image: url("../images/IMAGE.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.top-block
+{
+    height: 500px;
+    background: url(../images/header.png);
+}
+
+.top-block__logo
+{
+    font: 26px/1 "Lora";
+    color: #FFFFFF;
+}
+
+.top-block__nav
+{
+    font: 12px/1.67 "Oxygen";
+    color: #FFFFFF;
+}
+
+.top-block__title
+{
+    font: 50/1.02 "Lora";
+    color: #FFFFFF;
+}
+
+.top-block__text 
+{
+    font: 17px/1.18 "Oxygen";
+    color: rgba(255, 255, 255, 0.63);
+}
