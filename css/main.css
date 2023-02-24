@@ -6,6 +6,12 @@
 
 .top-block
 {
+    height: 360px;
+    background: #F5F5F5;
+}
+
+.top-block_canyon
+{
     height: 500px;
     background: url(../images/header.png);
     background-repeat: no-repeat;
@@ -18,12 +24,22 @@
     color: #FFFFFF;
 }
 
+.top-block__logo_black
+{
+    color: #2E2E2E;
+}
+
 .top-block__nav
 {
     letter-spacing: 0.6px;
     text-decoration: 0;
     font: 12px/1.67 "Oxygen";
     color: #FFFFFF;
+}
+
+.top-block__nav_black
+{
+    color: #2E2E2E;
 }
 
 .top-block__title
@@ -34,10 +50,20 @@
     color: #FFFFFF;
 }
 
+.top-block__title_black
+{
+    color: #2E2E2E;
+}
+
 .top-block__text 
 {
     font: 17px/1.18 "Oxygen";
     color: rgba(255, 255, 255, 0.63);
+}
+
+.top-block__text_black
+{
+    color: rgba(46, 46, 46, 0.63);
 }
 
 .top-block__button
@@ -62,9 +88,31 @@
     color: #768088;
 }
 
+.image-block
+{
+    width: 100%;
+}
+
 .main-block
 {
     background: #F7F7F7;
+}
+
+.main-block__article
+{
+    padding: 140px 240px 135px;
+}
+
+.main-block__article__text
+{
+    margin: 0px auto;
+    font: 24px/1.46 "Oxygen";
+    color: #101315;
+}
+
+.main-block__article__text:not(:last-child)
+{
+    margin-bottom: 40px;
 }
 
 .main-block__title
@@ -128,7 +176,7 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.main-block__content_small
+.main-block__content-small
 {
     width: 296px;
     height: 291px;
@@ -138,29 +186,35 @@
     border-radius: 3px;
 }
 
-.main-block__content_small__title
+.main-block__content-small__image
+{
+    width: 296px;
+    height: 150px;
+}
+
+.main-block__content-small__title
 {
     font: 16px/1.31 "Lora";
     color: #101315;
 }
 
-.main-block__content_small__text
+.main-block__content-small__text
 {
     font: 13px/1.46 "Oxygen";
     color: #7A7A7A;
 }
 
-.main-block__content_small__footer
+.main-block__content-small__footer
 {
     background: #FCFCFC;
 }
 
-.main-block__content_small_avatar
+.main-block__content-small_avatar
 {
     border-radius: 50%;
 }
 
-.main-block__content_small__sign
+.main-block__content-small__sign
 {
     font: 11px/3.18 "Oxygen";
     color: #999999;
