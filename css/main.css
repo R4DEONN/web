@@ -45,7 +45,7 @@
 .top-block__title
 {
     letter-spacing: 2px;
-    font: 50/1.02 "Lora";
+    font: 50px/1.02 "Lora";
     font-weight: 400;
     color: #FFFFFF;
 }
@@ -79,18 +79,19 @@
 .topick-block
 {
     background: #FFFFFF;
+    height: 65px;
 }
 
-.topick-block__nav
+.topick-block__ref
 {
     text-decoration: 0;
     font: 14px/1.43 "Lora";
     color: #768088;
 }
 
-.image-block
+.topick-block__ref:not(:last-child)
 {
-    width: 100%;
+    margin-right: 97px
 }
 
 .main-block
@@ -117,9 +118,13 @@
 
 .main-block__title
 {
-  font: 20px/1.35 "Oxygen";
-  letter-spacing: 2px;
-  color: #2E2E2E;
+    font: 20px/1.35 "Oxygen";
+    letter-spacing: 2px;
+    color: #2E2E2E;
+    border-bottom: 1px solid #DEDEDE;
+    padding-bottom: 16px;
+    width: 180px;
+    margin-top: 0;
 }
 
 .main-block__content
@@ -207,6 +212,7 @@
 
 .main-block__content-small__footer
 {
+    border-top: 1px solid #EFEFEF;
     background: #FCFCFC;
 }
 
@@ -235,7 +241,7 @@
     color: #FFFFFF;
 }
 
-.bottom-block__nav
+.bottom-block__ref
 {
     text-decoration: 0;
     font: 11px/2.36 "Oxygen";
