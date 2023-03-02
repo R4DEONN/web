@@ -3,39 +3,17 @@
     margin: 0;
 }
 
-h3
-{
-    margin-top: 0;
-}
-
 .top-block
 {
-    height: 360px;
+    max-height: 360px;
+    height: 100%;
     background: #F5F5F5;
-}
-
-.top-block_canyon
-{
-    height: 500px;
-    background: url(../images/header.png);
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .top-block__logo
 {
-    font: 400 26px/1 "Lora";
+    font: 400 26px "Lora";
     color: #FFFFFF;
-}
-
-.top-block__logo_black
-{
-    color: #2E2E2E;
-}
-
-.top-block__nav
-{
-
 }
 
 .top-block__ref
@@ -47,11 +25,6 @@ h3
     text-transform: uppercase;
 }
 
-.top-block__ref_black
-{
-    color: #2E2E2E;
-}
-
 .top-block__title
 {
     letter-spacing: 2px;
@@ -60,229 +33,30 @@ h3
     color: #FFFFFF;
 }
 
-.top-block__title_black
-{
-    color: #2E2E2E;
-}
-
 .top-block__text 
 {
     font: 400 17px/1.18 "Oxygen";
     color: rgba(255, 255, 255, 0.63);
 }
 
-.top-block__text_black
-{
-    color: rgba(46, 46, 46, 0.63);
-}
-
-.top-block__button
-{
-  height: 44px;
-  width: 167px;
-  background: #DD783F;
-  color: #FFFFFF;
-  text-transform: capitalize;
-  border-radius: 3px;
-  border: 0;
-}
-
-.tag-block
-{
-    background: #FFFFFF;
-    height: 65px;
-}
-
-.tag-block__ref
-{
-    text-decoration: 0;
-    font: 400 14px/1.43 "Lora";
-    color: #768088;
-}
-
-.tag-block__ref:not(:last-child)
-{
-    margin-right: 97px
-}
-
 .main-block
 {
     background: #F7F7F7;
+    padding: 15px;
 }
 
-.main-block__article
-{
-    padding: 140px 240px 135px;
-}
-
-.article__text
-{
-    margin: 0px auto;
-    font: 400 24px/1.46 "Oxygen";
-    color: #101315;
-}
-
-.article__text:not(:last-child)
-{
-    margin-bottom: 40px;
-}
-
-.main-block__title
-{
-    font: 400 20px/1.35 "Oxygen";
-    letter-spacing: 2px;
-    color: #2E2E2E;
-    border-bottom: 1px solid #DEDEDE;
-    padding-bottom: 16px;
-    width: 180px;
-    margin-top: 0;
-}
-
-.main-block__content
-{
-    width: 460px;
-    height: 280px;
-    background-size: 460px 280px;
-    background-repeat: no-repeat;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.main-block__content_borealis
-{
-    background-image: url(../images/the_road_ahead.jpg);
-}
-
-.main-block__content_lantern
-{
-    background-image: url(../images/from_top_down.jpg);
-}
-
-.content__tag
-{
-    width: 87px;
-    height: 26px;
-    background: #DD783F;
-    border: 0;
-    border-radius: 2px;
-    font: 400 12px/1.08 "Oxygen";
-    text-transform: uppercase;
-    color: #FFFFFF;
-}
-
-.content__info
-{
-
-}
-
-.content__title
-{
-    font: 400 27px/1.11 "Lora";
-    color: #FFFFFF;
-}
-
-.content__text
-{
-    font: 400 14px/1.79 "Oxygen";
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.content__sub-menu
-{
-
-}
-
-.sub-menu__author
-{
-    display: inline;
-}
-
-.author__avatar
-{
-    border-radius: 50%;
-}
-
-.author__sign
-{
-    font: 400 12px/2.92 "Oxygen";
-}
-
-.author__sign_color_white
-{
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.author__sign_color_black
-{
-    color: #999999;
-}
-
-.sub-menu__date
-{
-    font: 400 12px/2.92 "Oxygen";
-}
-
-.sub-menu__date_color_white
-{
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.sub-menu__date_color_black
-{
-    color: #999999;
-}
-
-.main-block__content-s
-{
-    width: 296px;
-    height: 291px;
-    background: #FFFFFF;
-    background-size: 296px 291px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.09);
-    border-radius: 3px;
-}
-
-.content-s__image
-{
-    width: 296px;
-    height: 150px;
-}
-
-.content-s__info
-{
-    height: 93px;
-}
-
-.content-s__title
-{
-    font: 400 16px/1.31 "Lora";
-    color: #101315;
-}
-
-.content-s__text
-{
-    font: 400 13px/1.46 "Oxygen";
-    color: #7A7A7A;
-}
-
-.content-s__sub-menu
-{
-    height: 48px;
-    border-top: 1px solid #EFEFEF;
-    background: #FCFCFC;
-}
 
 .bottom-block
 {
-    background:  #4D565D url(../images/bottom_block.jpg);
+    background: #4D565D url(../images/bottom_block.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 89px;
+    max-height: 89px;
 }
 
 .bottom-block__blur
 {
-    height: 89px;
+    max-height: 89px;
     background: rgba(35, 47, 56, 0.6);
 }
 
@@ -290,11 +64,6 @@ h3
 {
     font: 400 26px/1 "Lora";
     color: #FFFFFF;
-}
-
-.bottom-block__nav
-{
-
 }
 
 .bottom-block__ref

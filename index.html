@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <title>Escape</title>
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet" />
   </head>
   <body class="page">
-    <header class="top-block top-block_canyon">
+    <header class="top-block top-block_image_canyon">
       <span class="top-block__logo">Escape.</span>
-      <nav class="top-block__nav">
+      <nav>
         <a href="#" class="top-block__ref">Home</a>
         <a href="#" class="top-block__ref">Categories</a>
         <a href="#" class="top-block__ref">About</a>
@@ -33,12 +34,12 @@
     <div class="main-block">
       <section>
         <h2 class="main-block__title">Featured Posts</h2>
-        <div class="main-block__content main-block__content_borealis" onclick="location.href='./the-road-ahead.html';">
-          <div class="content__info">
-            <h3 class="content__title">The Road Ahead</h3>
-            <p class="content__text">The road ahead might be paved - it might not be.</p>
-            <div class="content__sub-menu">
-              <div class="sub-menu__author">
+        <div class="main-block__main-posts main-posts main-block__main-posts_image_borealis">
+          <div>
+            <h3 class="main-posts__title">The Road Ahead</h3>
+            <p class="main-posts__text">The road ahead might be paved - it might not be.</p>
+            <div class="main-posts__sub-menu sub-menu">
+              <div class="sub-menu__author author">
                 <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
                 <span class="author__sign author__sign_color_white">Mat Vogels</span>
               </div>
@@ -46,13 +47,15 @@
             </div>
           </div>
         </div>
-        <div class="main-block__content main-block__content_lantern">
-          <span class="content__tag">Adventure</span>
-          <div class="content__info">
-            <h3 class="content__title">From Top Down</h3>
-            <p class="content__text">Once a year, go someplace you've never been before.</p>
-            <div class="content__sub-menu">
-              <div class="sub-menu__author">
+        <div class="main-block__main-posts main-block__main-posts_image_lantern main-posts">
+          <div class="main-posts__tag tag">
+            <span class="tag__text">Adventure</span>
+          </div>
+          <div>
+            <h3 class="main-posts__title">From Top Down</h3>
+            <p class="main-posts__text">Once a year, go someplace you've never been before.</p>
+            <div class="main-posts__sub-menu sub-menu">
+              <div class="sub-menu__author author">
                 <img class="author__avatar" src="images/william_wong.jpg" alt="Mat Vogels" />
                 <span class="author__sign author__sign_color_white">William Wong</span>
               </div>
@@ -63,84 +66,84 @@
       </section>
       <section>
         <h2 class="main-block__title">Most Recent</h2>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/still_standing_tall.png" alt="Still Standing Tall" />
-          <div class="content-s__info">
-            <h3 class="content-s__title">Still Standing Tall</h3>
-            <p class="content-s__text">Life begins at the end of your comfort zone.</p>
+        <div class="main-block__posts posts">
+          <img class="posts__image" src="images/still_standing_tall.png" alt="Still Standing Tall" />
+          <div>
+            <h3 class="posts__title h3">Still Standing Tall</h3>
+            <p class="posts__text">Life begins at the end of your comfort zone.</p>
           </div>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author author">
               <img class="author__avatar" src="images/william_wong.jpg" alt="William Wong" />
               <span class="author__sign author__sign_color_black">William Wong</span>
             </div>
             <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/sunny_side_up.png" alt="Sunny Side Up" />
-          <h3 class="content-s__title">Sunny Side Up</h3>
-          <p class="content-s__text">No place is ever as bad as they tell you it's going to be.</p>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+        <div class="main-block__posts">
+          <img class="posts__image" src="images/sunny_side_up.png" alt="Sunny Side Up" />
+          <h3 class="posts__title h3">Sunny Side Up</h3>
+          <p class="posts__text">No place is ever as bad as they tell you it's going to be.</p>
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author author">
               <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
               <span class="author__sign author__sign_color_black">Mat Vogels</span>
             </div>
             <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/water_falls.png" alt="Water Falls" />
-          <div class="content-s__info">
-            <h3 class="content-s__title">Water Falls</h3>
-            <p class="content-s__text">We travel not to escape life, but for life not to escape us.</p>
+        <div class="main-block__posts">
+          <img class="posts__image" src="images/water_falls.png" alt="Water Falls" />
+          <div>
+            <h3 class="posts__title h3">Water Falls</h3>
+            <p class="posts__text">We travel not to escape life, but for life not to escape us.</p>
           </div>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author author">
               <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
               <span class="author__sign author__sign_color_black">Mat Vogels</span>
             </div>
             <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>     
         </div>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/through_the_mist.png" alt="Through the Mist" />
-          <div class="content-s__info">
-            <h3 class="content-s__title">Through the Mist</h3>
-            <p class="content-s__text">Travel makes you see what a tiny place you occupy in the world.</p>
+        <div class="main-block__posts">
+          <img class="posts__image" src="images/through_the_mist.png" alt="Through the Mist" />
+          <div>
+            <h3 class="posts__title h3">Through the Mist</h3>
+            <p class="posts__text">Travel makes you see what a tiny place you occupy in the world.</p>
           </div>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author  author">
               <img class="author__avatar" src="images/william_wong.jpg" alt="William Wong" />
               <span class="author__sign author__sign_color_black">William Wong</span>
             </div>
             <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/awaken_early.png" alt="Awaken Early" />
-          <div class="content-s__info">
-            <h3 class="content-s__title">Awaken Early</h3>
-            <p class="content-s__text">Not all those who wander are lost.</p>
+        <div class="main-block__posts">
+          <img class="posts__image" src="images/awaken_early.png" alt="Awaken Early" />
+          <div>
+            <h3 class="posts__title h3">Awaken Early</h3>
+            <p class="posts__text">Not all those who wander are lost.</p>
           </div>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author author">
               <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
               <span class="author__sign author__sign_color_black">Mat Vogels</span>
             </div>
             <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>       
         </div>
-        <div class="main-block__content-s">
-          <img class="content-s__image" src="images/try_it_always.png" alt="Try it Always" />
-          <div class="content-s__info">
-            <h3 class="content-s__title">Try it Always</h3>
-            <p class="content-s__text">
+        <div class="main-block__posts">
+          <img class="posts__image" src="images/try_it_always.png" alt="Try it Always" />
+          <div>
+            <h3 class="posts__title h3">Try it Always</h3>
+            <p class="posts__text">
               The world is a book, and those who do not travel read only one page.
             </p>
           </div>
-          <div class="content-s__sub-menu">
-            <div class="sub-menu__author">
+          <div class="posts__sub-menu sub-menu">
+            <div class="sub-menu__author author">
               <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
               <span class="author__sign author__sign_color_black">Mat Vogels</span>
             </div>
@@ -152,7 +155,7 @@
     <footer class="bottom-block">
       <div class="bottom-block__blur">
         <span class="bottom-block__logo">Escape.</span>
-        <nav class="bottom-block__nav">
+        <nav>
           <a href="#" class="bottom-block__ref">HOME</a>
           <a href="#" class="bottom-block__ref">CATEGORIES</a>
           <a href="#" class="bottom-block__ref">ABOUT</a>

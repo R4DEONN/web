@@ -1,0 +1,169 @@
+.h3
+{
+    margin-top: 0;
+}
+
+.top-block_image_canyon
+{
+    height: 500px;
+    background: url(../images/header.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.top-block__button
+{
+  height: 44px;
+  width: 167px;
+  background: #DD783F;
+  color: #FFFFFF;
+  text-transform: capitalize;
+  border-radius: 3px;
+  border: 0;
+}
+
+.tag-block
+{
+    background: #FFFFFF;
+    height: 65px;
+}
+
+.tag-block__ref
+{
+    text-decoration: 0;
+    font: 400 14px/1.43 "Lora";
+    color: #768088;
+}
+
+.tag-block__ref:not(:last-child)
+{
+    margin-right: 97px
+}
+
+.main-block__title
+{
+    font: 400 20px/1.35 "Oxygen";
+    letter-spacing: 2px;
+    color: #2E2E2E;
+    border-bottom: 1px solid #DEDEDE;
+    padding-bottom: 16px;
+    width: 180px;
+    margin-top: 0;
+}
+
+.main-block__main-posts
+{
+    width: 460px;
+    height: 280px;
+    background-size: 460px 280px;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.main-block__main-posts_image_borealis
+{
+    background-image: url(../images/the_road_ahead.jpg);
+}
+
+.main-block__main-posts_image_lantern
+{
+    background-image: url(../images/from_top_down.jpg);
+}
+
+.main-posts__tag
+{
+    width: 87px;
+    height: 26px;
+    background: #DD783F;
+    border: 0;
+    border-radius: 2px;
+}
+
+.tag__text
+{
+    font: 400 12px/1.08 "Oxygen";
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.main-posts__title
+{
+    font: 400 27px/1.11 "Lora";
+    color: #FFFFFF;
+}
+
+.main-posts__text
+{
+    font: 400 14px/1.79 "Oxygen";
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.author__avatar
+{
+    border-radius: 50%;
+}
+
+.author__sign
+{
+    font: 400 12px/2.92 "Oxygen";
+}
+
+.author__sign_color_white
+{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.author__sign_color_black
+{
+    color: #999999;
+}
+
+.sub-menu__date
+{
+    font: 400 12px/2.92 "Oxygen";
+}
+
+.sub-menu__date_color_white
+{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sub-menu__date_color_black
+{
+    color: #999999;
+}
+
+.main-block__posts
+{
+    width: 296px;
+    height: 291px;
+    background: #FFFFFF;
+    background-size: 296px 291px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
+    border-radius: 3px;
+    margin-bottom: 42px;
+}
+
+.posts__image
+{
+    max-height: 150px;
+}
+
+.posts__title
+{
+    font: 400 16px/1.31 "Lora";
+    color: #101315;
+}
+
+.posts__text
+{
+    font: 400 13px/1.46 "Oxygen";
+    color: #7A7A7A;
+}
+
+.posts__sub-menu
+{
+    border-top: 1px solid #EFEFEF;
+    background: #FCFCFC;
+}
