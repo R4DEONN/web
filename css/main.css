@@ -1,7 +1,11 @@
 .page 
 {
     margin: 0;
-    border: 0;
+}
+
+h3
+{
+    margin-top: 0;
 }
 
 .top-block
@@ -20,7 +24,7 @@
 
 .top-block__logo
 {
-    font: 26px/1 "Lora";
+    font: 400 26px/1 "Lora";
     color: #FFFFFF;
 }
 
@@ -29,12 +33,18 @@
     color: #2E2E2E;
 }
 
+.top-block__nav
+{
+
+}
+
 .top-block__ref
 {
     letter-spacing: 0.6px;
     text-decoration: 0;
-    font: 12px/1.67 "Oxygen";
+    font: 400 12px/1.67 "Oxygen";
     color: #FFFFFF;
+    text-transform: uppercase;
 }
 
 .top-block__ref_black
@@ -45,7 +55,7 @@
 .top-block__title
 {
     letter-spacing: 2px;
-    font: 50px/1.02 "Lora";
+    font: 400 50px/1.02 "Lora";
     font-weight: 400;
     color: #FFFFFF;
 }
@@ -57,7 +67,7 @@
 
 .top-block__text 
 {
-    font: 17px/1.18 "Oxygen";
+    font: 400 17px/1.18 "Oxygen";
     color: rgba(255, 255, 255, 0.63);
 }
 
@@ -72,24 +82,25 @@
   width: 167px;
   background: #DD783F;
   color: #FFFFFF;
+  text-transform: capitalize;
   border-radius: 3px;
   border: 0;
 }
 
-.topick-block
+.tag-block
 {
     background: #FFFFFF;
     height: 65px;
 }
 
-.topick-block__ref
+.tag-block__ref
 {
     text-decoration: 0;
-    font: 14px/1.43 "Lora";
+    font: 400 14px/1.43 "Lora";
     color: #768088;
 }
 
-.topick-block__ref:not(:last-child)
+.tag-block__ref:not(:last-child)
 {
     margin-right: 97px
 }
@@ -104,21 +115,21 @@
     padding: 140px 240px 135px;
 }
 
-.main-block__article__text
+.article__text
 {
     margin: 0px auto;
-    font: 24px/1.46 "Oxygen";
+    font: 400 24px/1.46 "Oxygen";
     color: #101315;
 }
 
-.main-block__article__text:not(:last-child)
+.article__text:not(:last-child)
 {
     margin-bottom: 40px;
 }
 
 .main-block__title
 {
-    font: 20px/1.35 "Oxygen";
+    font: 400 20px/1.35 "Oxygen";
     letter-spacing: 2px;
     color: #2E2E2E;
     border-bottom: 1px solid #DEDEDE;
@@ -147,42 +158,81 @@
     background-image: url(../images/from_top_down.jpg);
 }
 
-.main-block__content__button
+.content__tag
 {
     width: 87px;
     height: 26px;
     background: #DD783F;
     border: 0;
     border-radius: 2px;
-    font: 12px/1.08 "Oxygen";
+    font: 400 12px/1.08 "Oxygen";
     text-transform: uppercase;
     color: #FFFFFF;
 }
 
-.main-block__content__title
+.content__info
 {
-    font: 27px/1.11 "Lora";
+
+}
+
+.content__title
+{
+    font: 400 27px/1.11 "Lora";
     color: #FFFFFF;
 }
 
-.main-block__content__text
+.content__text
 {
-    font: 14px/1.79 "Oxygen";
+    font: 400 14px/1.79 "Oxygen";
     color: rgba(255, 255, 255, 0.7);
 }
 
-.main-block__content__image
+.content__sub-menu
+{
+
+}
+
+.sub-menu__author
+{
+    display: inline;
+}
+
+.author__avatar
 {
     border-radius: 50%;
 }
 
-.main-block__content__sign
+.author__sign
 {
-    font: 12px/2.92 "Oxygen";
+    font: 400 12px/2.92 "Oxygen";
+}
+
+.author__sign_color_white
+{
     color: rgba(255, 255, 255, 0.7);
 }
 
-.main-block__content-small
+.author__sign_color_black
+{
+    color: #999999;
+}
+
+.sub-menu__date
+{
+    font: 400 12px/2.92 "Oxygen";
+}
+
+.sub-menu__date_color_white
+{
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sub-menu__date_color_black
+{
+    color: #999999;
+}
+
+.main-block__content-s
 {
     width: 296px;
     height: 291px;
@@ -192,58 +242,64 @@
     border-radius: 3px;
 }
 
-.main-block__content-small__image
+.content-s__image
 {
     width: 296px;
     height: 150px;
 }
 
-.main-block__content-small__title
+.content-s__info
 {
-    font: 16px/1.31 "Lora";
+    height: 93px;
+}
+
+.content-s__title
+{
+    font: 400 16px/1.31 "Lora";
     color: #101315;
 }
 
-.main-block__content-small__text
+.content-s__text
 {
-    font: 13px/1.46 "Oxygen";
+    font: 400 13px/1.46 "Oxygen";
     color: #7A7A7A;
 }
 
-.main-block__content-small__footer
+.content-s__sub-menu
 {
+    height: 48px;
     border-top: 1px solid #EFEFEF;
     background: #FCFCFC;
 }
 
-.main-block__content-small_avatar
-{
-    border-radius: 50%;
-}
-
-.main-block__content-small__sign
-{
-    font: 11px/3.18 "Oxygen";
-    color: #999999;
-}
-
 .bottom-block
 {
-    background: url(../images/bottom_block.jpg);
+    background:  #4D565D url(../images/bottom_block.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 89px;
 }
 
+.bottom-block__blur
+{
+    height: 89px;
+    background: rgba(35, 47, 56, 0.6);
+}
+
 .bottom-block__logo
 {
-    font: 26px/1 "Lora";
+    font: 400 26px/1 "Lora";
     color: #FFFFFF;
+}
+
+.bottom-block__nav
+{
+
 }
 
 .bottom-block__ref
 {
     text-decoration: 0;
-    font: 11px/2.36 "Oxygen";
+    font: 400 11px/2.36 "Oxygen";
     color: rgba(255, 255, 255, 0.6);
 }

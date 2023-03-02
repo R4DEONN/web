@@ -10,119 +10,155 @@
   <body class="page">
     <header class="top-block top-block_canyon">
       <span class="top-block__logo">Escape.</span>
-      <nav>
-        <a href="#" class="top-block__ref">HOME</a>
-        <a href="#" class="top-block__ref">CATEGORIES</a>
-        <a href="#" class="top-block__ref">ABOUT</a>
-        <a href="#" class="top-block__ref">CONTACT</a>
+      <nav class="top-block__nav">
+        <a href="#" class="top-block__ref">Home</a>
+        <a href="#" class="top-block__ref">Categories</a>
+        <a href="#" class="top-block__ref">About</a>
+        <a href="#" class="top-block__ref">Contact</a>
       </nav>
       <h1 class="top-block__title">Let's do it together.</h1>
       <p class="top-block__text">
         We travel the world in search of stories. Come along for the ride.
       </p>
-      <button class="top-block__button">View Latest Posts</button>
+      <button class="top-block__button">View latest posts</button>
     </header>
-    <div class="topick-block">
-      <a href="#" class="topick-block__ref">Nature</a>
-      <a href="#" class="topick-block__ref">Photography</a>
-      <a href="#" class="topick-block__ref">Relaxation</a>
-      <a href="#" class="topick-block__ref">Vacation</a>
-      <a href="#" class="topick-block__ref">Travel</a>
-      <a href="#" class="topick-block__ref">Adventure</a>
+    <div class="tag-block">
+      <a href="#" class="tag-block__ref">Nature</a>
+      <a href="#" class="tag-block__ref">Photography</a>
+      <a href="#" class="tag-block__ref">Relaxation</a>
+      <a href="#" class="tag-block__ref">Vacation</a>
+      <a href="#" class="tag-block__ref">Travel</a>
+      <a href="#" class="tag-block__ref">Adventure</a>
     </div>
     <div class="main-block">
       <section>
         <h2 class="main-block__title">Featured Posts</h2>
         <div class="main-block__content main-block__content_borealis" onclick="location.href='./the-road-ahead.html';">
-          <h3 class="main-block__content__title">The Road Ahead</h3>
-          <p class="main-block__content__text">The road ahead might be paved - it might not be.</p>
-          <img class="main-block__content__image" src="images/mat_vogels.jpg" alt="Mat Vogels" />
-          <span class="main-block__content__sign">Mat Vogels</span>
-          <span class="main-block__content__sign">September 25, 2015</span>
+          <div class="content__info">
+            <h3 class="content__title">The Road Ahead</h3>
+            <p class="content__text">The road ahead might be paved - it might not be.</p>
+            <div class="content__sub-menu">
+              <div class="sub-menu__author">
+                <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
+                <span class="author__sign author__sign_color_white">Mat Vogels</span>
+              </div>
+              <span class="sub-menu__date sub-menu__date_color_white">September 25, 2015</span>
+            </div>
+          </div>
         </div>
         <div class="main-block__content main-block__content_lantern">
-          <button class="main-block__content__button">Adventure</button>
-          <h3 class="main-block__content__title">From Top Down</h3>
-          <p class="main-block__content__text">Once a year, go someplace you've never been before.</p>
-          <img class="main-block__content__image" src="images/william_wong.jpg" alt="Mat Vogels" />
-          <span class="main-block__content__sign">William Wong</span>
-          <span class="main-block__content__sign">September 25, 2015</span>
+          <span class="content__tag">Adventure</span>
+          <div class="content__info">
+            <h3 class="content__title">From Top Down</h3>
+            <p class="content__text">Once a year, go someplace you've never been before.</p>
+            <div class="content__sub-menu">
+              <div class="sub-menu__author">
+                <img class="author__avatar" src="images/william_wong.jpg" alt="Mat Vogels" />
+                <span class="author__sign author__sign_color_white">William Wong</span>
+              </div>
+              <span class="sub-menu__date sub-menu__date_color_white">September 25, 2015</span>
+            </div>
+          </div>   
         </div>
       </section>
       <section>
         <h2 class="main-block__title">Most Recent</h2>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/still_standing_tall.png" alt="Still Standing Tall" />
-          <h3 class="main-block__content-small__title">Still Standing Tall</h3>
-          <p class="main-block__content-small__text">Life begins at the end of your comfort zone.</p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/william_wong.jpg" alt="William Wong" />
-            <span class="main-block__content-small__sign">William Wong</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/still_standing_tall.png" alt="Still Standing Tall" />
+          <div class="content-s__info">
+            <h3 class="content-s__title">Still Standing Tall</h3>
+            <p class="content-s__text">Life begins at the end of your comfort zone.</p>
+          </div>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/william_wong.jpg" alt="William Wong" />
+              <span class="author__sign author__sign_color_black">William Wong</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/sunny_side_up.png" alt="Sunny Side Up" />
-          <h3 class="main-block__content-small__title">Sunny Side Up</h3>
-          <p class="main-block__content-small__text">No place is ever as bad as they tell you it's going to be.</p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
-            <span class="main-block__content-small__sign">Mat Vogels</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/sunny_side_up.png" alt="Sunny Side Up" />
+          <h3 class="content-s__title">Sunny Side Up</h3>
+          <p class="content-s__text">No place is ever as bad as they tell you it's going to be.</p>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
+              <span class="author__sign author__sign_color_black">Mat Vogels</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/water_falls.png" alt="Water Falls" />
-          <h3 class="main-block__content-small__title">Water Falls</h3>
-          <p class="main-block__content-small__text">We travel not to escape life, but for life not to escape us.</p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
-            <span class="main-block__content-small__sign">Mat Vogels</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/water_falls.png" alt="Water Falls" />
+          <div class="content-s__info">
+            <h3 class="content-s__title">Water Falls</h3>
+            <p class="content-s__text">We travel not to escape life, but for life not to escape us.</p>
+          </div>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
+              <span class="author__sign author__sign_color_black">Mat Vogels</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>     
         </div>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/through_the_mist.png" alt="Through the Mist" />
-          <h3 class="main-block__content-small__title">Through the Mist</h3>
-          <p class="main-block__content-small__text">Travel makes you see what a tiny place you occupy in the world.</p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/william_wong.jpg" alt="William Wong" />
-            <span class="main-block__content-small__sign">William Wong</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/through_the_mist.png" alt="Through the Mist" />
+          <div class="content-s__info">
+            <h3 class="content-s__title">Through the Mist</h3>
+            <p class="content-s__text">Travel makes you see what a tiny place you occupy in the world.</p>
+          </div>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/william_wong.jpg" alt="William Wong" />
+              <span class="author__sign author__sign_color_black">William Wong</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/awaken_early.png" alt="Awaken Early" />
-          <h3 class="main-block__content-small__title">Awaken Early</h3>
-          <p class="main-block__content-small__text">Not all those who wander are lost.</p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
-            <span class="main-block__content-small__sign">Mat Vogels</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/awaken_early.png" alt="Awaken Early" />
+          <div class="content-s__info">
+            <h3 class="content-s__title">Awaken Early</h3>
+            <p class="content-s__text">Not all those who wander are lost.</p>
+          </div>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
+              <span class="author__sign author__sign_color_black">Mat Vogels</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>       
         </div>
-        <div class="main-block__content-small">
-          <img class="main-block__content-small__image" src="images/try_it_always.png" alt="Try it Always" />
-          <h3 class="main-block__content-small__title">Try it Always</h3>
-          <p class="main-block__content-small__text">
-            The world is a book, and those who do not travel read only one page.
-          </p>
-          <div class="main-block__content-small__footer">
-            <img class="main-block__content-small_avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
-            <span class="main-block__content-small__sign">Mat Vogels</span>
-            <span class="main-block__content-small__sign">9/25/2015</span>
+        <div class="main-block__content-s">
+          <img class="content-s__image" src="images/try_it_always.png" alt="Try it Always" />
+          <div class="content-s__info">
+            <h3 class="content-s__title">Try it Always</h3>
+            <p class="content-s__text">
+              The world is a book, and those who do not travel read only one page.
+            </p>
+          </div>
+          <div class="content-s__sub-menu">
+            <div class="sub-menu__author">
+              <img class="author__avatar" src="images/mat_vogels.jpg" alt="Mat Vogels" />
+              <span class="author__sign author__sign_color_black">Mat Vogels</span>
+            </div>
+            <span class="sub-menu__date sub-menu__date_color_black">9/25/2015</span>
           </div>
         </div>
       </section>
     </div>
     <footer class="bottom-block">
-      <span class="bottom-block__logo">Escape.</span>
-      <nav>
-        <a href="#" class="bottom-block__ref">HOME</a>
-        <a href="#" class="bottom-block__ref">CATEGORIES</a>
-        <a href="#" class="bottom-block__ref">ABOUT</a>
-        <a href="#" class="bottom-block__ref">CONTACT</a>
-      </nav>
+      <div class="bottom-block__blur">
+        <span class="bottom-block__logo">Escape.</span>
+        <nav class="bottom-block__nav">
+          <a href="#" class="bottom-block__ref">HOME</a>
+          <a href="#" class="bottom-block__ref">CATEGORIES</a>
+          <a href="#" class="bottom-block__ref">ABOUT</a>
+          <a href="#" class="bottom-block__ref">CONTACT</a>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>
