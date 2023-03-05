@@ -3,29 +3,39 @@
     margin-top: 0;
 }
 
-.top-block_image_canyon
+.top-block
 {
     height: 500px;
     background: url(../images/header.png);
-    background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .top-block__button
 {
-  height: 44px;
-  width: 167px;
-  background: #DD783F;
-  color: #FFFFFF;
-  text-transform: capitalize;
-  border-radius: 3px;
-  border: 0;
+    height: 44px;
+    width: 167px;
+    background: #DD783F;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
 }
 
 .tag-block
 {
     background: #FFFFFF;
     height: 65px;
+    margin: 0 auto;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .tag-block__ref
@@ -35,9 +45,18 @@
     color: #768088;
 }
 
-.tag-block__ref:not(:last-child)
+.main-block
 {
-    margin-right: 97px
+    background: #F7F7F7;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+.main-block__featured-posts-block {
+    width: 64%;
+    margin-bottom: 67px;
 }
 
 .main-block__title
@@ -47,8 +66,15 @@
     color: #2E2E2E;
     border-bottom: 1px solid #DEDEDE;
     padding-bottom: 16px;
-    width: 180px;
-    margin-top: 0;
+    max-width: 180px;
+    width: 100%;
+    margin: 0 auto 21px;
+    text-align: center;
+}
+
+.main-block__featured-posts {
+    display: flex;
+    justify-content: center;
 }
 
 .main-block__main-posts
@@ -71,6 +97,11 @@
     background-image: url(../images/from_top_down.jpg);
 }
 
+.main-posts {
+    margin: 10px;
+    text-decoration: 0;
+}
+
 .main-posts__tag
 {
     width: 87px;
@@ -80,11 +111,15 @@
     border-radius: 2px;
 }
 
-.tag__text
+.main-posts__tag-text
 {
     font: 400 12px/1.08 "Oxygen";
     text-transform: uppercase;
     color: #FFFFFF;
+}
+
+.main-posts__info {
+    position: absolute;
 }
 
 .main-posts__title
@@ -134,6 +169,17 @@
     color: #999999;
 }
 
+.main-block__most-recent-posts-block {
+    width: 66%;
+    margin-bottom: 108px;
+}
+
+.main-block__most-recent-posts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .main-block__posts
 {
     width: 296px;
@@ -142,7 +188,12 @@
     background-size: 296px 291px;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     border-radius: 3px;
-    margin-bottom: 42px;
+    cursor: pointer;
+}
+
+.posts {
+    margin: 22px 12px 25px;
+    
 }
 
 .posts__image

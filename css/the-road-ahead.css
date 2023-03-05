@@ -1,17 +1,13 @@
+.top-block
+{
+    height: 360px;
+    background: #F5F5F5;
+}
+
 .image-block
 {
     height: 550px;
     background-size: cover;
-}
-
-.top-block__logo_color_black
-{
-    color: #2E2E2E;
-}
-
-.top-block__ref_color_black
-{
-    color: #2E2E2E;
 }
 
 .top-block__title_color_black
@@ -22,6 +18,12 @@
 .top-block__text_color_black
 {
     color: rgba(46, 46, 46, 0.63);
+}
+
+.main-block
+{
+    background: #F7F7F7;
+    padding: 15px;
 }
 
 .main-block__article

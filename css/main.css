@@ -3,20 +3,34 @@
     margin: 0;
 }
 
-.top-block
+.header
 {
-    max-height: 360px;
-    height: 100%;
-    background: #F5F5F5;
+    position: absolute;
+    top: 17px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.top-block__logo
+.header__nav {
+    max-width: 380px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;  
+}
+
+.header__logo
 {
+    
     font: 400 26px "Lora";
     color: #FFFFFF;
+    cursor: pointer;
 }
 
-.top-block__ref
+.header__ref
 {
     letter-spacing: 0.6px;
     text-decoration: 0;
@@ -25,45 +39,63 @@
     text-transform: uppercase;
 }
 
+.header__logo_color_black
+{
+    color: #2E2E2E;
+}
+
+.header__ref_color_black
+{
+    color: #2E2E2E;
+}
+
 .top-block__title
 {
     letter-spacing: 2px;
     font: 400 50px/1.02 "Lora";
     font-weight: 400;
     color: #FFFFFF;
+    margin-bottom: 20px;
 }
 
 .top-block__text 
 {
     font: 400 17px/1.18 "Oxygen";
     color: rgba(255, 255, 255, 0.63);
+    margin-bottom: 31px;
 }
-
-.main-block
-{
-    background: #F7F7F7;
-    padding: 15px;
-}
-
 
 .bottom-block
 {
     background: #4D565D url(../images/bottom_block.jpg);
-    background-repeat: no-repeat;
     background-size: cover;
-    max-height: 89px;
+    height: 89px;
 }
 
 .bottom-block__blur
 {
-    max-height: 89px;
+    height: 89px;
     background: rgba(35, 47, 56, 0.6);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .bottom-block__logo
 {
     font: 400 26px "Lora";
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+.bottom-block__nav {
+    max-width: 272px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .bottom-block__ref
