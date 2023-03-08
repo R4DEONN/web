@@ -1,13 +1,18 @@
 .top-block
 {
     height: 360px;
-    background: #F5F5F5;
+    background: #E5E5E5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .image-block
 {
-    height: 550px;
-    background-size: cover;
+    max-height: 534px;
+    height: 100%;
+    width: 100%;
 }
 
 .top-block__title_color_black
@@ -28,7 +33,8 @@
 
 .main-block__article
 {
-    padding: 140px 240px 135px;
+    margin: 140px auto;
+    width: 67%;
 }
 
 .article__text
