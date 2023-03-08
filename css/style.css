@@ -1,8 +1,3 @@
-.h3
-{
-    margin-top: 0;
-}
-
 .top-block
 {
     height: 500px;
@@ -55,7 +50,7 @@
 }
 
 .main-block__featured-posts-block {
-    width: 64%;
+    width: 100%;
     margin-bottom: 67px;
 }
 
@@ -75,14 +70,13 @@
 .main-block__featured-posts {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .main-block__main-posts
 {
     width: 460px;
     height: 280px;
-    background-size: 460px 280px;
-    background-repeat: no-repeat;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -104,11 +98,15 @@
 
 .main-posts__tag
 {
+    margin-bottom: auto;
     width: 87px;
     height: 26px;
     background: #DD783F;
     border: 0;
     border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main-posts__tag-text
@@ -119,13 +117,19 @@
 }
 
 .main-posts__info {
-    position: absolute;
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }
 
 .main-posts__title
 {
     font: 400 27px/1.11 "Lora";
     color: #FFFFFF;
+    margin: 0 0 8px 0;
 }
 
 .main-posts__text
@@ -134,37 +138,47 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.author__avatar
-{
-    border-radius: 50%;
+.main-posts__sub-menu {
+    margin-top: 17px;
 }
 
-.author__sign
-{
-    font: 400 12px/2.92 "Oxygen";
-}
-
-.author__sign_color_white
-{
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.author__sign_color_black
-{
-    color: #999999;
+.sub-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sub-menu__date
 {
     font: 400 12px/2.92 "Oxygen";
-}
-
-.sub-menu__date_color_white
-{
     color: rgba(255, 255, 255, 0.7);
 }
 
+
 .sub-menu__date_color_black
+{
+    color: #999999;
+}
+
+.sub-menu__author {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sub-menu__avatar
+{
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sub-menu__sign
+{
+    font: 400 12px/2.92 "Oxygen";
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sub-menu__sign_color_black
 {
     color: #999999;
 }
@@ -182,10 +196,11 @@
 
 .main-block__posts
 {
-    width: 296px;
-    height: 291px;
+    max-width: 296px;
+    width: 100%;
+    max-height: 291px;
+    height: 100%;
     background: #FFFFFF;
-    background-size: 296px 291px;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     border-radius: 3px;
     cursor: pointer;
@@ -193,18 +208,25 @@
 
 .posts {
     margin: 22px 12px 25px;
-    
 }
 
 .posts__image
 {
     max-height: 150px;
+    height: 100%;
+}
+
+.posts__info {
+    box-sizing: border-box;
+    padding: 14px 13px 12px 13px;
+    height: 93px;
 }
 
 .posts__title
 {
     font: 400 16px/1.31 "Lora";
     color: #101315;
+    margin: 0 0 6px 0;
 }
 
 .posts__text
@@ -215,6 +237,8 @@
 
 .posts__sub-menu
 {
+    height: 48px;
+    padding: 0 13px;
     border-top: 1px solid #EFEFEF;
     background: #FCFCFC;
 }
