@@ -14,7 +14,8 @@
     flex-wrap: wrap;
 }
 
-.header__nav {
+.header__nav 
+{
     max-width: 380px;
     width: 100%;
     display: flex;
@@ -23,8 +24,7 @@
 }
 
 .header__logo
-{
-    
+{    
     font: 400 26px "Lora";
     color: #FFFFFF;
     cursor: pointer;
@@ -62,21 +62,22 @@
 {
     font: 400 17px/1.18 "Oxygen";
     color: rgba(255, 255, 255, 0.63);
-    margin-bottom: 31px;
+    margin: 0 0 31px;
 }
 
 .bottom-block
 {
     background: #4D565D url(../images/bottom_block.jpg);
     background-size: cover;
-    height: 378px;
+    min-height: 378px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.bottom-block__form {
-    height: 289px;
+.bottom-block__form 
+{
+    margin: auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,13 +96,15 @@
     text-align: center;
 }
 
-.bottom-block__form-info {
+.bottom-block__form-info
+{
     width: 90%;
     display: flex;
     justify-content: center;
 }
 
-.bottom-block__email {
+.bottom-block__email 
+{
     box-sizing: border-box;
     height: 50px;
     max-width: 375px;
@@ -109,15 +112,16 @@
     font: 400 12px/1.17 "Roboto";
     padding: 0 35px 0 35px;
     border: 0;
-    border-radius: 3px 0px 0px 3px;
+    border-radius: 3px 0 0 3px;
 }
 
-.bottom-block__submit {
+.bottom-block__submit 
+{
     max-width: 125px;
     width: 100%;
     height: 50px;
     background: rgba(255, 255, 255, 0.28);
-    border-radius: 0px 3px 3px 0px;
+    border-radius: 0 3px 3px 0;
     border: 0;
     font: 400 12px/1.17 "Roboto";
     color: #F8F8F8;
@@ -127,7 +131,7 @@
 .bottom-block__blur
 {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    height: 89px;
+    padding: 32px 0;
     background: rgba(35, 47, 56, 0.6);
     display: flex;
     justify-content: space-around;
@@ -142,7 +146,8 @@
     cursor: pointer;
 }
 
-.bottom-block__nav {
+.bottom-block__nav 
+{
     max-width: 272px;
     width: 100%;
     display: flex;

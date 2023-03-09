@@ -1,6 +1,6 @@
-.top-block
+.top-block 
 {
-    height: 500px;
+    min-height: 500px;
     background: url(../images/header.png);
     background-size: cover;
     display: flex;
@@ -9,9 +9,9 @@
     justify-content: center;
 }
 
-.top-block__button
+.top-block__button 
 {
-    height: 44px;
+    padding: 14px 0;
     width: 167px;
     background: #DD783F;
     color: #FFFFFF;
@@ -21,10 +21,10 @@
     cursor: pointer;
 }
 
-.tag-block
+.tag-block 
 {
     background: #FFFFFF;
-    height: 65px;
+    padding: 22px 0;
     margin: 0 auto;
     width: 60%;
     display: flex;
@@ -33,14 +33,14 @@
     flex-wrap: wrap;
 }
 
-.tag-block__ref
+.tag-block__ref 
 {
     text-decoration: 0;
     font: 400 14px/1.43 "Lora";
     color: #768088;
 }
 
-.main-block
+.main-block 
 {
     background: #F7F7F7;
     display: flex;
@@ -49,12 +49,13 @@
     padding-top: 60px;
 }
 
-.main-block__featured-posts-block {
+.main-block__featured-posts-block 
+{
     width: 100%;
     margin-bottom: 67px;
 }
 
-.main-block__title
+.main-block__title 
 {
     font: 400 20px/1.35 "Oxygen";
     letter-spacing: 2px;
@@ -67,40 +68,42 @@
     text-align: center;
 }
 
-.main-block__featured-posts {
+.main-block__featured-posts 
+{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.main-block__main-posts
+.main-block__main-post
 {
     width: 460px;
-    height: 280px;
+    min-height: 280px;
     border-radius: 3px;
     cursor: pointer;
 }
 
-.main-block__main-posts_image_borealis
+.main-block__main-post_image_borealis 
 {
     background-image: url(../images/the_road_ahead.jpg);
 }
 
-.main-block__main-posts_image_lantern
+.main-block__main-post_image_lantern 
 {
     background-image: url(../images/from_top_down.jpg);
 }
 
-.main-posts {
+.main-post 
+{
     margin: 10px;
     text-decoration: 0;
 }
 
-.main-posts__tag
+.main-post__tag 
 {
     margin-bottom: auto;
     width: 87px;
-    height: 26px;
+    padding: 7px 0;
     background: #DD783F;
     border: 0;
     border-radius: 2px;
@@ -109,14 +112,15 @@
     justify-content: center;
 }
 
-.main-posts__tag-text
+.main-post__tag-text 
 {
     font: 400 12px/1.08 "Oxygen";
     text-transform: uppercase;
     color: #FFFFFF;
 }
 
-.main-posts__info {
+.main-post__info 
+{
     box-sizing: border-box;
     padding: 20px;
     height: 100%;
@@ -125,80 +129,86 @@
     justify-content: end;
 }
 
-.main-posts__title
+.main-post__title 
 {
     font: 400 27px/1.11 "Lora";
     color: #FFFFFF;
     margin: 0 0 8px 0;
 }
 
-.main-posts__text
+.main-post__text 
 {
+    margin: 0;
     font: 400 14px/1.79 "Oxygen";
     color: rgba(255, 255, 255, 0.7);
 }
 
-.main-posts__sub-menu {
+.main-post__sub-menu 
+{
     margin-top: 17px;
 }
 
-.sub-menu {
+.sub-menu 
+{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.sub-menu__date
+.sub-menu__date 
 {
     font: 400 12px/2.92 "Oxygen";
     color: rgba(255, 255, 255, 0.7);
 }
 
 
-.sub-menu__date_color_black
+.sub-menu__date_color_black 
 {
     color: #999999;
 }
 
-.sub-menu__author {
+.sub-menu__author 
+{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.sub-menu__avatar
+.sub-menu__avatar 
 {
     border-radius: 50%;
     margin-right: 10px;
 }
 
-.sub-menu__sign
+.sub-menu__sign 
 {
     font: 400 12px/2.92 "Oxygen";
     color: rgba(255, 255, 255, 0.7);
 }
 
-.sub-menu__sign_color_black
+.sub-menu__sign_color_black 
 {
     color: #999999;
 }
 
-.main-block__most-recent-posts-block {
+.main-block__most-recent-posts-block 
+{
     width: 66%;
     margin-bottom: 108px;
 }
 
-.main-block__most-recent-posts {
+.main-block__most-recent-posts 
+{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.main-block__posts
+.main-block__post 
 {
     max-width: 296px;
     width: 100%;
-    max-height: 291px;
+    min-height: 291px;
     height: 100%;
     background: #FFFFFF;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
@@ -206,39 +216,42 @@
     cursor: pointer;
 }
 
-.posts {
+.post
+{
     margin: 22px 12px 25px;
 }
 
-.posts__image
+.post__image 
 {
     max-height: 150px;
     height: 100%;
     width: 100%;
 }
 
-.posts__info {
+.post__info 
+{
     box-sizing: border-box;
-    padding: 14px 13px 12px 13px;
-    height: 93px;
+    padding: 14px 13px 12px;
+    min-height: 93px;
 }
 
-.posts__title
+.post__title 
 {
     font: 400 16px/1.31 "Lora";
     color: #101315;
-    margin: 0 0 6px 0;
+    margin: 0 0 6px;
 }
 
-.posts__text
+.post__text 
 {
+    margin: 0;
     font: 400 13px/1.46 "Oxygen";
     color: #7A7A7A;
 }
 
-.posts__sub-menu
+.post__sub-menu 
 {
-    height: 48px;
+    min-height: 48px;
     padding: 0 13px;
     border-top: 1px solid #EFEFEF;
     background: #FCFCFC;
