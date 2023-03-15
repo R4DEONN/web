@@ -6,7 +6,7 @@
 .header
 {
     position: absolute;
-    top: 17px;
+    padding-top: 17px;
     width: 100%;
     display: flex;
     justify-content: space-around;
