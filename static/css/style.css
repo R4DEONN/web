@@ -1,7 +1,7 @@
 .top-block 
 {
     min-height: 500px;
-    background: url(../images/header.png);
+    background: url(../img/header.png);
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -73,6 +73,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    column-gap: 20px;
 }
 
 .main-block__main-post
@@ -85,17 +86,16 @@
 
 .main-block__main-post_image_borealis 
 {
-    background-image: url(../images/the_road_ahead.jpg);
+    background-image: url(../img/the_road_ahead.jpg);
 }
 
 .main-block__main-post_image_lantern 
 {
-    background-image: url(../images/from_top_down.jpg);
+    background-image: url(../img/from_top_down.jpg);
 }
 
 .main-post 
 {
-    margin: 10px;
     text-decoration: 0;
 }
 
@@ -203,6 +203,8 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: stretch;
+    row-gap: 25px;
+    column-gap: 24px;
 }
 
 .main-block__post 
@@ -217,7 +219,6 @@
 
 .post
 {
-    margin: 0 12px 25px;
     display: flex;
     flex-direction: column;    
 }

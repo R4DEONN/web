@@ -3,28 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <title>The Road Ahead</title>
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/the-road-ahead.css" />
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <link rel="stylesheet" href="../static/css/the-road-ahead.css" />
     <link href="https://fonts.googleapis.com/css2?family=Oxygen&family=Lora&family=Roboto&display=swap" rel="stylesheet" />
   </head>
   <body class="page">
     <header class="header">
       <span class="header__logo header__logo_color_black">Escape.</span>
       <nav class="header__nav">
-        <a class="header__ref header__ref_color_black" href="./index.html">HOME</a>
+        <a class="header__ref header__ref_color_black" href="/home">HOME</a>
         <a class="header__ref header__ref_color_black" href="#">CATEGORIES</a>
         <a class="header__ref header__ref_color_black" href="#">ABOUT</a>
         <a class="header__ref header__ref_color_black" href="#">CONTACT</a>
       </nav>
     </header>
     <div class="top-block">
-      <h1 class="top-block__title top-block__title_color_black">The Road Ahead</h1>
-      <p class="top-block__text top-block__text_color_black">
-        The road ahead might be paved - it might not be.
-      </p>
+      <h1 class="top-block__title top-block__title_color_black">{{ .Title }}</h1>
+      <p class="top-block__text top-block__text_color_black">{{ .SubTitle }}</p>
     </div>
     <img
-      src="images/the_road_ahead.png"
+      src="static/img/the_road_ahead.png"
       alt="The Road Ahead"
       class="image-block"
     />

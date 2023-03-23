@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&family=Lora&family=Roboto&display=swap" rel="stylesheet" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <span class="header__logo">Escape</span>
+      <nav class="header__nav">
+        <a href="#" class="header__ref">Home</a>
+        <a href="#" class="header__ref">Categories</a>
+        <a href="#" class="header__ref">About</a>
+        <a href="#" class="header__ref">Contact</a>
+      </nav>
+    </header>
+    <div class="top-block">
+      <h1 class="top-block__title">{{ .Title }}</h1>
+      <p class="top-block__text">{{ .SubTitle }}</p>
+      <button class="top-block__button">View latest posts</button>
+    </div>
+    <div class="tag-block">
+      <a href="#" class="tag-block__ref">Nature</a>
+      <a href="#" class="tag-block__ref">Photography</a>
+      <a href="#" class="tag-block__ref">Relaxation</a>
+      <a href="#" class="tag-block__ref">Vacation</a>
+      <a href="#" class="tag-block__ref">Travel</a>
+      <a href="#" class="tag-block__ref">Adventure</a>
+    </div>
+    <div class="main-block">
+      <section class="main-block__featured-posts-block">
+        <h2 class="main-block__title">Featured Posts</h2>
+        <div class="main-block__featured-posts">
+        {{ range .FeaturedPosts }}
+          <a href="/post" class="main-block__main-post main-post {{ .ImgModifier }}">
+            <div class="main-post__info">
+              <h3 class="main-post__title">{{ .Title }}</h3>
+              <p class="main-post__text">{{ .Subtitle }}</p>
+              <div class="main-post__sub-menu sub-menu">
+                <div class="sub-menu__author">
+                  <img class="sub-menu__avatar" src="{{ .AuthorImg }}" alt="Mat Vogels" />
+                  <span class="sub-menu__sign">{{ .Author }}</span>
+                </div>
+                <span class="sub-menu__date">{{ .PublishDate }}</span>
+              </div>
+            </div>
+          </a>
+        {{ end }}
+        </div>
+      </section>
+      <section class="main-block__most-recent-posts-block">
+        <h2 class="main-block__title">Most Recent</h2>
+        <div class="main-block__most-recent-posts">
+        {{ range .MostRecentPosts }}
+          <div class="main-block__post post">
+            <img class="post__image" src="{{ .TopImg }}" alt="Still Standing Tall" />
+            <div class="post__info">
+              <h3 class="post__title">{{ .Title }}</h3>
+              <p class="post__text">{{ .SubTitle }}</p>
+            </div>
+            <div class="post__sub-menu sub-menu">
+              <div class="sub-menu__author author">
+                <img class="sub-menu__avatar" src="{{ .AuthorImg }}" alt="William Wong" />
+                <span class="sub-menu__sign sub-menu__sign_color_black">{{ .Author }}</span>
+              </div>
+              <span class="sub-menu__date sub-menu__date_color_black">{{ .PublishDate }}</span>
+            </div>
+          </div>
+        {{ end }}
+        </div>
+      </section>
+    </div>
+    <div class="bottom-block">
+      <form class="bottom-block__form">
+        <h2 class="bottom-block__form-title">Stay in Touch</h2>
+        <div class="bottom-block__form-info">
+          <input class="bottom-block__email" type="text" name="useremail" placeholder="Enter your email addres" />
+          <input class="bottom-block__submit" type="submit" name="submit" value="Submit" />
+        </div>
+      </form>
+      <footer class="bottom-block__blur">
+        <span class="bottom-block__logo">Escape.</span>
+        <nav class="bottom-block__nav">
+          <a href="#" class="bottom-block__ref">HOME</a>
+          <a href="#" class="bottom-block__ref">CATEGORIES</a>
+          <a href="#" class="bottom-block__ref">ABOUT</a>
+          <a href="#" class="bottom-block__ref">CONTACT</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>

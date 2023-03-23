@@ -67,7 +67,7 @@
 
 .bottom-block
 {
-    background: #4D565D url(../images/bottom_block.jpg);
+    background: #4D565D url(../img/bottom_block.jpg);
     background-size: cover;
     min-height: 378px;
     display: flex;
@@ -131,7 +131,7 @@
 .bottom-block__blur
 {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 32px 0;
+    padding: 27px 0;
     background: rgba(35, 47, 56, 0.6);
     display: flex;
     justify-content: space-around;
