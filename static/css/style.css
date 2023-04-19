@@ -215,6 +215,7 @@
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.09);
     border-radius: 3px;
     cursor: pointer;
+    text-decoration: 0;
 }
 
 .post

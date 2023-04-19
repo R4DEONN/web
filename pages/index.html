@@ -35,7 +35,7 @@
         <h2 class="main-block__title">Featured Posts</h2>
         <div class="main-block__featured-posts">
         {{ range .FeaturedPosts }}
-          <a href="/post" class="main-block__main-post main-post {{ .ImgModifier }}">
+          <a href="{{ .PostURL }}" class="main-block__main-post main-post {{ .ImgModifier }}">
             <div class="main-post__info">
               <h3 class="main-post__title">{{ .Title }}</h3>
               <p class="main-post__text">{{ .Subtitle }}</p>
@@ -55,7 +55,7 @@
         <h2 class="main-block__title">Most Recent</h2>
         <div class="main-block__most-recent-posts">
         {{ range .MostRecentPosts }}
-          <div class="main-block__post post">
+          <a href="{{ .PostURL }}" class="main-block__post post">
             <img class="post__image" src="{{ .TopImg }}" alt="Still Standing Tall" />
             <div class="post__info">
               <h3 class="post__title">{{ .Title }}</h3>
@@ -68,7 +68,7 @@
               </div>
               <span class="sub-menu__date sub-menu__date_color_black">{{ .PublishDate }}</span>
             </div>
-          </div>
+          </a>
         {{ end }}
         </div>
       </section>
