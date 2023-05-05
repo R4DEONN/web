@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	port         = ":3030"
+	host         = "localhost:3030"
 	dbDriverName = "mysql"
 )
 
@@ -24,14 +24,20 @@ func main() {
 	client := sqlx.NewDb(db, dbDriverName)
 
 	mux := mux.NewRouter()
+
 	mux.HandleFunc("/home", index(client))
 
 	mux.HandleFunc("/post/{postID}", post(client))
 
+    mux.HandleFunc("/admin", admin(client))
+    mux.HandleFunc("/createPost"), createPost(client))
+
+    mux.HandleFunc("/login", login(client))
+
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
-	log.Println("Start server " + port)
-	err = http.ListenAndServe(port, mux)
+	log.Println("Start server " + host)
+	err = http.ListenAndServe(host, mux)
 	if err != nil {
 		log.Fatal(err)
 	}

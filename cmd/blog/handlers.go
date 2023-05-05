@@ -15,13 +15,12 @@ import (
 type indexPage struct {
 	Title           string
 	SubTitle        string
-	FeaturedPosts   []*featuredPostData
-	MostRecentPosts []*mostRecentPostData
+	FeaturedPosts   []featuredPostData
+	MostRecentPosts []mostRecentPostData
 }
 
 type featuredPostData struct {
 	PostID      string `db:"post_id"`
-	PostURL     string
 	Title       string `db:"title"`
 	Subtitle    string `db:"subtitle"`
 	ImgModifier string `db:"image_mod"`
@@ -32,7 +31,6 @@ type featuredPostData struct {
 
 type mostRecentPostData struct {
 	PostID      string `db:"post_id"`
-	PostURL     string
 	TopImg      string `db:"image_url"`
 	Title       string `db:"title"`
 	SubTitle    string `db:"subtitle"`
@@ -48,7 +46,18 @@ type postData struct {
 	ImageURL string `db:"image_url"`
 }
 
-func index(client *sqlx.DB) func(http.ResponseWriter, *http.Request) {
+type fullPostData struct {
+    Title string `json:"title"`
+    SubTitle string `json:"subtitle"`
+    authorName string `json:"authorName"`
+    authorAvatar string `json:"authorAvatar"`
+    publishDate string `json:"publishDate"`
+    mainImage string `json:"mainImage"`
+    previewImage string `json:"previewImage"`
+    content string `json:"content"`
+}
+
+func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ts, err := template.ParseFiles("pages/index.html")
 		if err != nil {
@@ -127,7 +136,7 @@ func post(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func featuredPosts(client *sqlx.DB) ([]*featuredPostData, error) {
+func featuredPosts(client *sqlx.DB) ([]featuredPostData, error) {
 	const query = `
 		SELECT
 		    post_id,
@@ -142,21 +151,17 @@ func featuredPosts(client *sqlx.DB) ([]*featuredPostData, error) {
 		WHERE featured = 1
 	`
 
-	var posts []*featuredPostData
+	var posts []featuredPostData
 
 	err := client.Select(&posts, query)
 	if err != nil {
 		return nil, err
 	}
 
-	for _, post := range posts {
-		post.PostURL = "/post/" + post.PostID
-	}
-
 	return posts, nil
 }
 
-func mostRecentPosts(client *sqlx.DB) ([]*mostRecentPostData, error) {
+func mostRecentPosts(client *sqlx.DB) ([]mostRecentPostData, error) {
 	const query = `
 		SELECT
 		    post_id,
@@ -171,15 +176,11 @@ func mostRecentPosts(client *sqlx.DB) ([]*mostRecentPostData, error) {
 		WHERE featured = 0
 	`
 
-	var posts []*mostRecentPostData
+	var posts []mostRecentPostData
 
 	err := client.Select(&posts, query)
 	if err != nil {
 		return nil, err
-	}
-
-	for _, post := range posts {
-		post.PostURL = "/post/" + post.PostID
 	}
 
 	return posts, nil
@@ -206,4 +207,45 @@ func postByID(client *sqlx.DB, postID int) (postData, error) {
 	}
 
 	return post, nil
+}
+
+
+func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+    return func(w http.ResponseWriter, r *http.Request) {
+        ts, err := template.ParseFiles("pages/admin.html")
+        if err != nil {
+            http.Error(w, "Internal Server Error", 500)
+            log.Printf(err.Error())
+            return
+        }
+
+        var data int
+
+        err = ts.Execute(w, data)
+        if err != nil {
+            http.Error(w, "Internal Server Error", 500)
+            log.Printf(err.Error())
+            return
+        }
+    }
+}
+
+func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+    return func(w http.ResponseWriter, r *http.Request) {
+        ts, err := template.ParseFiles("pages/auth/logination.html")
+        if err != nil {
+            http.Error(w, "Internal Server Error", 500)
+            log.Printf(err.Error())
+            return
+        }
+
+        var data int
+
+        err = ts.Execute(w, data)
+        if err != nil {
+            http.Error(w, "Internal Server Error", 500)
+            log.Printf(err.Error())
+            return
+        }
+    }
 }
