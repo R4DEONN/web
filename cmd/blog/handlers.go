@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -47,14 +48,19 @@ type postData struct {
 }
 
 type fullPostData struct {
-    Title string `json:"title"`
-    SubTitle string `json:"subtitle"`
-    authorName string `json:"authorName"`
-    authorAvatar string `json:"authorAvatar"`
-    publishDate string `json:"publishDate"`
-    mainImage string `json:"mainImage"`
-    previewImage string `json:"previewImage"`
-    content string `json:"content"`
+	Title        string `json:"title"`
+	SubTitle     string `json:"subtitle"`
+	AuthorName   string `json:"authorName"`
+	AuthorAvatar string `json:"authorAvatar"`
+	PublishDate  string `json:"publishDate"`
+	MainImage    string `json:"mainImage"`
+	PreviewImage string `json:"previewImage"`
+	Content      string `json:"content"`
+}
+
+type userData struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -209,43 +215,120 @@ func postByID(client *sqlx.DB, postID int) (postData, error) {
 	return post, nil
 }
 
-
 func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
-    return func(w http.ResponseWriter, r *http.Request) {
-        ts, err := template.ParseFiles("pages/admin.html")
-        if err != nil {
-            http.Error(w, "Internal Server Error", 500)
-            log.Printf(err.Error())
-            return
-        }
+	return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/admin.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        var data int
+		var data int
 
-        err = ts.Execute(w, data)
-        if err != nil {
-            http.Error(w, "Internal Server Error", 500)
-            log.Printf(err.Error())
-            return
-        }
-    }
+		err = ts.Execute(w, data)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+	}
+}
+
+func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		const query = `
+            INSERT INTO
+                post (
+                title,
+                subtitle,
+                author,
+                author_url,
+                publish_date,
+                image_url,
+                article_image_url,
+                content
+            )
+            VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?
+            );
+        `
+
+		decoder := json.NewDecoder(r.Body)
+		var post fullPostData
+		err := decoder.Decode(&post)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+
+		db.MustExec(
+			query,
+			post.Title,
+			post.SubTitle,
+			post.AuthorName,
+			post.AuthorAvatar,
+			post.PublishDate,
+			post.PreviewImage,
+			post.MainImage,
+			post.Content,
+		)
+	}
 }
 
 func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
-    return func(w http.ResponseWriter, r *http.Request) {
-        ts, err := template.ParseFiles("pages/auth/logination.html")
-        if err != nil {
-            http.Error(w, "Internal Server Error", 500)
-            log.Printf(err.Error())
-            return
-        }
+	return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/auth/logination.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        var data int
+		var data int
 
-        err = ts.Execute(w, data)
-        if err != nil {
-            http.Error(w, "Internal Server Error", 500)
-            log.Printf(err.Error())
-            return
-        }
-    }
+		err = ts.Execute(w, data)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+	}
+}
+
+func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		const query = `
+			SELECT
+			  email,
+			  password
+			FROM
+			  user
+			WHERE
+			  email = ? AND password = ?
+		`
+		decoder := json.NewDecoder(r.Body)
+		var user userData
+		err := decoder.Decode(&user)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+
+		_, err = db.Query(query, user.Email, user.Password)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				http.Error(w, "User not found", http.StatusUnauthorized)
+				log.Printf(err.Error())
+				return
+			}
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+
+		w.WriteHeader(http.StatusAccepted)
+	}
 }

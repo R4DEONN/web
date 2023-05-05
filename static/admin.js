@@ -31,7 +31,7 @@ const form = document.forms[0];
 const alertMessage = document.querySelector('#alertMessage');
 const successMessage = document.querySelector('#successMessage');
 
-form.onsubmit = e =>
+form.onsubmit = async e =>
 {
   e.preventDefault();
   let errors = ValidateQueryParams(form.elements);
@@ -66,6 +66,14 @@ form.onsubmit = e =>
   }
   const json = JSON.stringify(props, null, '\t');
   console.log(json);
+
+  fetch('/createPost', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: json
+    });
 }
 
 function ValidateQueryParams(query)

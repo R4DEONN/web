@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jmoiron/sqlx"
 	"github.com/gorilla/mux"
+	"github.com/jmoiron/sqlx"
 )
 
 const (
@@ -29,10 +29,11 @@ func main() {
 
 	mux.HandleFunc("/post/{postID}", post(client))
 
-    mux.HandleFunc("/admin", admin(client))
-    mux.HandleFunc("/createPost"), createPost(client))
+	mux.HandleFunc("/admin", admin(client))
+	mux.HandleFunc("/createPost", createPost(client)).Methods("POST")
 
-    mux.HandleFunc("/login", login(client))
+	mux.HandleFunc("/login", login(client))
+	mux.HandleFunc("/auth", auth(client)).Methods("POST")
 
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
