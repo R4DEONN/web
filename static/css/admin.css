@@ -175,7 +175,7 @@
 .form-row__input_filled
 {
   background: #F7F7F7;
-  border-bottom: 2px solid #2E2E2E;
+  border-bottom: 1px solid #2E2E2E;
 }
 
 .form-row__upload-buttons

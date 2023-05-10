@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"encoding/base64"
+	"os"
 	"html/template"
 	"log"
 	"net/http"
@@ -47,13 +49,16 @@ type postData struct {
 	ImageURL string `db:"image_url"`
 }
 
-type fullPostData struct {
+type createPostRequest struct {
 	Title        string `json:"title"`
 	SubTitle     string `json:"subtitle"`
 	AuthorName   string `json:"authorName"`
+	AuthorAvatarName string `json:"authorAvatarName"`
 	AuthorAvatar string `json:"authorAvatar"`
 	PublishDate  string `json:"publishDate"`
+	MainImageName string `json:"mainImageName""`
 	MainImage    string `json:"mainImage"`
+	PreviewImageName string `json:"previewImageName"`
 	PreviewImage string `json:"previewImage"`
 	Content      string `json:"content"`
 }
@@ -255,7 +260,7 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
         `
 
 		decoder := json.NewDecoder(r.Body)
-		var post fullPostData
+		var post createPostRequest
 		err := decoder.Decode(&post)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
@@ -263,17 +268,87 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		db.MustExec(
+		authorImage, err := base64.StdEncoding.DecodeString(post.AuthorAvatar)
+		if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+		mainImage, err := base64.StdEncoding.DecodeString(post.MainImage)
+		if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+            log.Printf(err.Error())
+        	return
+        }
+		previewImage, err := base64.StdEncoding.DecodeString(post.PreviewImage)
+		if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+        //TODO добавить обработку ошибок
+        post.AuthorAvatarName = "static/img/" + post.AuthorAvatarName
+        post.MainImageName = "static/img/" + post.MainImageName
+        post.PreviewImageName = "static/img/" + post.PreviewImageName
+
+        authorImageFile, err := os.Create(post.AuthorAvatarName)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+        _, err = authorImageFile.Write(authorImage)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+            return
+        }
+
+        mainImageFile, err := os.Create(post.MainImageName)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+        _, err = mainImageFile.Write(mainImage)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+
+        previewImageFile, err := os.Create(post.PreviewImageName)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+        _, err = previewImageFile.Write(previewImage)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+
+		_, err = db.Exec(
 			query,
 			post.Title,
 			post.SubTitle,
 			post.AuthorName,
-			post.AuthorAvatar,
+			post.AuthorAvatarName,
 			post.PublishDate,
-			post.PreviewImage,
-			post.MainImage,
+			post.PreviewImageName,
+			post.MainImageName,
 			post.Content,
 		)
+        if err != nil {
+        	http.Error(w, "Internal Server Error", 500)
+        	log.Printf(err.Error())
+        	return
+        }
+
+
+		w.WriteHeader(http.StatusAccepted)
 	}
 }
 

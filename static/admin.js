@@ -11,7 +11,7 @@ logOutButton.addEventListener('click', () => { window.location = '/login' })
 const textInputElements = document.querySelectorAll('.form-row__input');
 for (let el of textInputElements)
 {
-  el.addEventListener('change', ChangeStyle);
+  el.addEventListener('input', ChangeStyle);
 }
 function ChangeStyle(event)
 {
@@ -31,6 +31,7 @@ const form = document.forms[0];
 const alertMessage = document.querySelector('#alertMessage');
 const successMessage = document.querySelector('#successMessage');
 
+const formProps = {};
 form.onsubmit = async e =>
 {
   e.preventDefault();
@@ -58,22 +59,35 @@ form.onsubmit = async e =>
   {
     successMessage.classList.remove('hidden');
   }
-  const props = {};
+
   for (let element of form.elements)
   {
-    if (element.type == 'submit') continue;
-    props[element.name] = element.value;
+    if (element.type == 'submit')
+    {
+      continue;
+    }
+    if (element.type !== 'file')
+    {
+      formProps[element.name] = element.value;
+    }
+    else
+    {
+      let fileName = element.value.replace('C:\\fakepath\\', '');
+      formProps[element.name + 'Name'] = fileName;
+    }
   }
-  const json = JSON.stringify(props, null, '\t');
+  const json = JSON.stringify(formProps, null, '\t');
   console.log(json);
 
-  fetch('/createPost', {
+  let response = await fetch('/api/post', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json;charset=utf-8'
         },
         body: json
     });
+
+
 }
 
 function ValidateQueryParams(query)
@@ -90,7 +104,7 @@ function ValidateQueryParams(query)
 }
 
 const titleEl = document.querySelector('#inputTitle');
-titleEl.addEventListener('change', previewTitle);
+titleEl.addEventListener('input', previewTitle);
 function previewTitle(event)
 {
   for (let element of TITLE_ARRAY)
@@ -100,7 +114,7 @@ function previewTitle(event)
 }
 
 const subtitleEl = document.querySelector('#inputSub');
-subtitleEl.addEventListener('change', previewSubtitle);
+subtitleEl.addEventListener('input', previewSubtitle);
 function previewSubtitle(event)
 {
   for (let element of SUBTITLE_ARRAY)
@@ -110,7 +124,7 @@ function previewSubtitle(event)
 }
 
 const dateEl = document.querySelector('#inputDate');
-dateEl.addEventListener('change', previewDate);
+dateEl.addEventListener('input', previewDate);
 
 function previewDate(event)
 {
@@ -143,10 +157,11 @@ removeAvatarButton.addEventListener('click', deleteAvatar);
 
 function previewAuthorImage(event)
 {
-  const reader = new FileReader();
-  reader.onloadend = function ()
+  const reader1 = new FileReader();
+  const reader2 = new FileReader();
+  reader1.onloadend = function ()
   {
-    if (reader.result === '')
+    if (reader1.result === '')
     {
       return;
     }
@@ -156,15 +171,20 @@ function previewAuthorImage(event)
     removeAvatarButton.classList.remove('hidden');
     for (let image of AVATAR_ARRAY)
     {
-      image.style.background = "url(" + reader.result + ")";
+      image.style.background = "url(" + reader1.result + ")";
       image.style.backgroundSize = "cover";
     }
+  }
 
+  reader2.onloadend = function ()
+  {
+    formProps['authorAvatar'] = btoa(reader2.result);
   }
 
   if (event.target.files[0])
   {
-    reader.readAsDataURL(event.target.files[0]);
+    reader1.readAsDataURL(event.target.files[0]);
+    reader2.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -194,10 +214,11 @@ const mainImageRemark = document.querySelector('#mainImageRemark');
 
 function previewMainImage(event)
 {
-  let reader = new FileReader();
-  reader.onloadend = function ()
+  const reader1 = new FileReader();
+  const reader2 = new FileReader();
+  reader1.onloadend = function ()
   {
-    if (reader.result === '')
+    if (reader1.result === '')
     {
       return;
     }
@@ -208,15 +229,21 @@ function previewMainImage(event)
     }
     for (let image of MAIN_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + reader.result + ")"
+      image.style.background = "url(" + reader1.result + ")";
       image.style.backgroundSize = "cover";
       image.classList.add('upload__main-image_uploaded')
     }
   }
 
+  reader2.onloadend = function ()
+  {
+    formProps['mainImage'] = btoa(reader2.result);
+  }
+
   if (event.target.files[0])
   {
-    reader.readAsDataURL(event.target.files[0]);
+    reader1.readAsDataURL(event.target.files[0]);
+    reader2.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -247,10 +274,11 @@ const previewImageRemark = document.querySelector('#previewImageRemark');
 
 function previewPreviewImage(event)
 {
-  let reader = new FileReader();
-  reader.onloadend = function ()
+  const reader1 = new FileReader();
+  const reader2 = new FileReader();
+  reader1.onloadend = function ()
   {
-    if (reader.result === '')
+    if (reader1.result === '')
     {
       return;
     }
@@ -261,15 +289,21 @@ function previewPreviewImage(event)
     }
     for (let image of PREVIEW_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + reader.result + ")"
+      image.style.background = "url(" + reader1.result + ")";
       image.style.backgroundSize = "cover";
       image.classList.add('upload__preview-image_uploaded')
     }
   }
 
+  reader2.onloadend = function ()
+  {
+    formProps['previewImage'] = btoa(reader2.result);
+  }
+
   if (event.target.files[0])
   {
-    reader.readAsDataURL(event.target.files[0]);
+    reader1.readAsDataURL(event.target.files[0]);
+    reader2.readAsBinaryString(event.target.files[0]);
   }
   else
   {
