@@ -1,6 +1,6 @@
 .top-block
 {
-    padding: 94px 0;
+    padding: 94px 0 20px;
     background: #E5E5E5;
     display: flex;
     flex-direction: column;
@@ -31,12 +31,6 @@
     padding: 15px;
 }
 
-.main-block__article
-{
-    margin: 140px auto;
-    width: 67%;
-}
-
 .article__text
 {
     margin: 0 auto;
@@ -44,7 +38,88 @@
     color: #101315;
 }
 
-.article__text:not(:last-child)
+@media screen and (min-width: 480px)
 {
-    margin-bottom: 40px;
+    .top-block
+    {
+        padding: 100px 0 35px;
+    }
+
+    .main-block
+    {
+        padding: 20px 25px;
+    }
+}
+
+@media screen and (min-width: 600px)
+{
+    .top-block
+    {
+        padding: 110px 0 50px;
+    }
+
+    .main-block
+     {
+        padding: 30px 50px;
+     }
+}
+
+@media screen and (min-width: 768px)
+{
+    .top-block
+    {
+        padding: 130px 0 60px;
+    }
+
+    .main-block
+    {
+        padding: 50px 80px;
+    }
+}
+
+@media screen and (min-width: 1024px)
+{
+    .top-block
+    {
+        padding: 145px 0 80px;
+    }
+
+    .main-block
+    {
+        padding: 100px 160px;
+    }
+}
+
+@media screen and (min-width: 1200px)
+{
+    .top-block
+    {
+        padding: 155px 0 95px;
+    }
+
+    .main-block
+    {
+        padding: 120px 200px;
+    }
+}
+
+@media screen and (min-width: 1366px)
+{
+    .top-block
+    {
+        padding: 163px 0 113px;
+    }
+
+    .main-block
+    {
+        padding: 140px 240px;
+    }
+}
+
+@media screen and (min-width: 1920px)
+{
+    .main-block
+    {
+        padding: 140px 340px;
+    }
 }

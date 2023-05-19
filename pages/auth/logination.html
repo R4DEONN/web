@@ -18,14 +18,23 @@
     <span class="message__subtitle">Log in to start creating</span>
   </div>
   <form class="form">
-    <h1 class="form__title">Log In</h1>
+    <h1 id="formTitle" class="form__title">Log In</h1>
+    <div id="mainError" class="form__error hidden">
+      <img src="/static/img/alert-circle.svg" />
+      <span id="mainErrorText" class="form__error-text">Email or password is incorrect.</span>
+    </div>
     <div class="form__form-row form-row">
       <p class="form-row__title">Email</p>
-      <input type="email" name="email" class="form-row__input" />
+      <input id="inputEmail" type="text" name="email" class="form-row__input" />
+      <span id="emailError" class="form-row__error hidden">Email is required.</span>
     </div>
-    <div class="container__form-row">
+    <div class="form__form-row form-row">
       <p class="form-row__title">Password</p>
-      <input type="password" name="password" class="form-row__input" />
+      <div class="form-row__input-password">
+        <input id="inputPassword" type="password" name="password" class="form-row__input" />
+        <img id="passwordEye" src="/static/img/eye.svg" class="form-row__input-eye"/>
+      </div>
+      <span id="passwordError" class="form-row__error hidden">Password is required.</span>
     </div>
     <button type="submit" class="form__login">Log In</button>
   </form>

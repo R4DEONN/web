@@ -83,8 +83,12 @@
   border-left: 2px solid #E86961;
   background: #FFEBEA;
 
-  padding: 10px 12px;
-  margin-bottom: 16px;
+  height: 0;
+  transform-origin: top;
+  transition: height 0.3s linear;
+  overflow: hidden;
+
+  padding: 0 12px;
 
   display: flex;
   align-items: center;
@@ -102,6 +106,12 @@
 {
   font: 400 14px/1.43 "Oxygen", sans-serif;
   color: #2E2E2E;
+}
+
+.appearance
+{
+  margin-bottom: 16px;
+  height: 44px;
 }
 
 .main-block__main-info
@@ -176,6 +186,17 @@
 {
   background: #F7F7F7;
   border-bottom: 1px solid #2E2E2E;
+}
+
+.form-row__input_error
+{
+  border-bottom: 1px solid #E86961;
+}
+
+.form-row__error-message
+{
+  font: 400 12px/1.33 "Oxygen", sans-serif;
+  color: #E86961;
 }
 
 .form-row__upload-buttons

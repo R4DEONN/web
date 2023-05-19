@@ -3,61 +3,72 @@ const SUBTITLE_ARRAY = [document.querySelector('.article-preview__subtitle'), do
 const AVATAR_ARRAY = [document.querySelector('.form-row__avatar-placeholder'), document.querySelector('.card-preview__author-image')];
 const MAIN_IMAGE_ARRAY = [document.querySelector('.upload__main-image'), document.querySelector('.article-preview__image')];
 const PREVIEW_IMAGE_ARRAY = [document.querySelector('.upload__preview-image'), document.querySelector('.card-preview__image')];
-
-
 const logOutButton = document.querySelector('#logOutButton');
-logOutButton.addEventListener('click', () => { window.location = '/login' })
-
 const textInputElements = document.querySelectorAll('.form-row__input');
-for (let el of textInputElements)
-{
-  el.addEventListener('input', ChangeStyle);
-}
-function ChangeStyle(event)
-{
-  const el = event.target;
-  if (el.value !== '')
-  {
-    el.classList.add('form-row__input_filled');
-  }
-  else
-  {
-    el.classList.remove('form-row__input_filled');
-  }
-}
-
-
 const form = document.forms[0];
 const alertMessage = document.querySelector('#alertMessage');
 const successMessage = document.querySelector('#successMessage');
-
 const formProps = {};
+const titleEl = document.querySelector('#inputTitle');
+const subtitleEl = document.querySelector('#inputSub');
+const dateEl = document.querySelector('#inputDate');
+const authorNameEl = document.querySelector('#inputAuthorName');
+const uploadAvatarButtonText = document.querySelector('#uploadAvatarText');
+const avatarCameraImg = document.querySelector('#avatarCamera');
+const removeAvatarButton = document.querySelector('#removeAvatarButton');
+const authorImageEl = document.querySelector('#inputAuthorImage');
+const mainImageEl = document.querySelector('#inputMainImage');
+const mainImageController = document.querySelector('#mainImageController');
+const removeMainImageButton = document.querySelector('#removeMainImageButton');
+const mainImageRemark = document.querySelector('#mainImageRemark');
+const previewImageController = document.querySelector('#previewImageController');
+const removePreviewImageButton = document.querySelector('#removePreviewImageButton');
+const previewImageEl = document.querySelector('#inputPreviewImage');
+const previewImageRemark = document.querySelector('#previewImageRemark');
+
+initListeners();
+
+function initListeners()
+{
+  logOutButton.addEventListener('click', () => { window.location = '/login' })
+  for (let el of textInputElements)
+  {
+    el.addEventListener('input', changeStyle);
+  }
+  for (let el of form.elements)
+  {
+    if (el.type !== 'submit')
+    {
+      el.addEventListener('click', removeError);
+    }
+  }
+  titleEl.addEventListener('input', previewTitle);
+  subtitleEl.addEventListener('input', previewSubtitle);
+  authorNameEl.addEventListener('change', previewAuthorName);
+  dateEl.addEventListener('input', previewDate);
+  authorImageEl.addEventListener('change', previewAuthorImage);
+  removeAvatarButton.addEventListener('click', deleteAvatar);
+  mainImageEl.addEventListener('change', previewMainImage);
+  removeMainImageButton.addEventListener('click', deleteMainImage);
+  previewImageEl.addEventListener('change', previewPreviewImage);
+  removePreviewImageButton.addEventListener('click', deletePreviewImage);
+}
+
 form.onsubmit = async e =>
 {
   e.preventDefault();
-  let errors = ValidateQueryParams(form.elements);
-  if (Object.keys(errors).length !== 0)
+  let errors = validateQueryParams(form.elements);
+  if (errors)
   {
-    if (alertMessage.classList.contains('hidden'))
+    if (!alertMessage.classList.contains('appearance'))
     {
-      alertMessage.classList.remove('hidden');
+      alertMessage.classList.add('appearance');
     }
-    if (!successMessage.classList.contains('hidden'))
+    if (successMessage.classList.contains('appearance'))
     {
-      successMessage.classList.add('hidden');
+      successMessage.classList.remove('appearance');
     }
-    const json = JSON.stringify(errors, null, '\t');
-    console.log(json);
     return;
-  }
-
-  if (!alertMessage.classList.contains('hidden'))
-  {
-    alertMessage.classList.add('hidden');
-  }
-  if (successMessage.classList.contains('hidden'))
-  {
-    successMessage.classList.remove('hidden');
   }
 
   for (let element of form.elements)
@@ -72,8 +83,7 @@ form.onsubmit = async e =>
     }
     else
     {
-      let fileName = element.value.replace('C:\\fakepath\\', '');
-      formProps[element.name + 'Name'] = fileName;
+      formProps[element.name + 'Name'] = element.value.replace('C:\\fakepath\\', '');
     }
   }
   const json = JSON.stringify(formProps, null, '\t');
@@ -87,24 +97,75 @@ form.onsubmit = async e =>
         body: json
     });
 
-
+  if (response.ok)
+  {
+    if (!successMessage.classList.contains('appearance'))
+    {
+      successMessage.classList.add('appearance');
+    }
+  }
+  else
+  {
+    if (!alertMessage.classList.contains('appearance'))
+    {
+      alertMessage.classList.add('appearance');
+    }
+  }
 }
 
-function ValidateQueryParams(query)
+function validateQueryParams(query)
 {
-  let errors = {};
+  let errors = false;
   for (let element of query)
   {
     if (element.value === '' && element.type !== 'submit')
     {
-      errors[element.name] = 'Поле ' + element.name + ' не должно быть пустым';
+      errors = true;
+      const lastChild = element.parentNode.lastChild;
+      if (lastChild.nodeName == 'SPAN' && lastChild.classList.contains('form-row__error-message'))
+      {
+        continue;
+      }
+      let errorMessage = document.createElement('span');
+      errorMessage.classList.add('form-row__error-message');
+      let textEl = element.parentNode.childNodes[1];
+      let text = textEl.innerHTML;
+      errorMessage.innerHTML = text + ' is required.';
+      element.classList.add('form-row__input_error');
+      element.parentNode.appendChild(errorMessage);
     }
   }
   return errors;
 }
 
-const titleEl = document.querySelector('#inputTitle');
-titleEl.addEventListener('input', previewTitle);
+function changeStyle(event)
+{
+  const el = event.target;
+  if (el.value !== '')
+  {
+    el.classList.add('form-row__input_filled');
+  }
+  else
+  {
+    el.classList.remove('form-row__input_filled');
+  }
+}
+
+function removeError(event)
+{
+  const el = event.target;
+  if (el.classList.contains('form-row__input_error'))
+  {
+    el.classList.remove('form-row__input_error');
+    const errorMessage = el.parentNode.lastChild;
+    el.parentNode.removeChild(errorMessage);
+  }
+  if (alertMessage.classList.contains('appearance'))
+  {
+    alertMessage.classList.remove('appearance');
+  }
+}
+
 function previewTitle(event)
 {
   for (let element of TITLE_ARRAY)
@@ -113,8 +174,6 @@ function previewTitle(event)
   }
 }
 
-const subtitleEl = document.querySelector('#inputSub');
-subtitleEl.addEventListener('input', previewSubtitle);
 function previewSubtitle(event)
 {
   for (let element of SUBTITLE_ARRAY)
@@ -123,17 +182,11 @@ function previewSubtitle(event)
   }
 }
 
-const dateEl = document.querySelector('#inputDate');
-dateEl.addEventListener('input', previewDate);
-
 function previewDate(event)
 {
   let element = document.querySelector('.card-preview__date');
   element.innerHTML = event.target.value;
 }
-
-const authorNameEl = document.querySelector('#inputAuthorName');
-authorNameEl.addEventListener('change', previewAuthorName);
 
 function previewAuthorName(event)
 {
@@ -148,20 +201,13 @@ function previewAuthorName(event)
   }
 }
 
-const authorImageEl = document.querySelector('#inputAuthorImage');
-authorImageEl.addEventListener('change', previewAuthorImage);
-const uploadAvatarButtonText = document.querySelector('#uploadAvatarText');
-const avatarCameraImg = document.querySelector('#avatarCamera');
-const removeAvatarButton = document.querySelector('#removeAvatarButton');
-removeAvatarButton.addEventListener('click', deleteAvatar);
-
 function previewAuthorImage(event)
 {
-  const reader1 = new FileReader();
-  const reader2 = new FileReader();
-  reader1.onloadend = function ()
+  const readerPreviewImage = new FileReader();
+  const readerDownloadImage = new FileReader();
+  readerPreviewImage.onloadend = function ()
   {
-    if (reader1.result === '')
+    if (readerPreviewImage.result === '')
     {
       return;
     }
@@ -171,20 +217,20 @@ function previewAuthorImage(event)
     removeAvatarButton.classList.remove('hidden');
     for (let image of AVATAR_ARRAY)
     {
-      image.style.background = "url(" + reader1.result + ")";
+      image.style.background = "url(" + readerPreviewImage.result + ")";
       image.style.backgroundSize = "cover";
     }
   }
 
-  reader2.onloadend = function ()
+  readerDownloadImage.onloadend = function ()
   {
-    formProps['authorAvatar'] = btoa(reader2.result);
+    formProps['authorAvatar'] = btoa(readerDownloadImage.result);
   }
 
   if (event.target.files[0])
   {
-    reader1.readAsDataURL(event.target.files[0]);
-    reader2.readAsBinaryString(event.target.files[0]);
+    readerPreviewImage.readAsDataURL(event.target.files[0]);
+    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -202,23 +248,13 @@ function deleteAvatar()
   AVATAR_ARRAY[1].style.background = "#F7F7F7";
 }
 
-
-const mainImageEl = document.querySelector('#inputMainImage');
-mainImageEl.addEventListener('change', previewMainImage);
-
-const mainImageController = document.querySelector('#mainImageController');
-const removeMainImageButton = document.querySelector('#removeMainImageButton');
-removeMainImageButton.addEventListener('click', deleteMainImage);
-const mainImageRemark = document.querySelector('#mainImageRemark');
-
-
 function previewMainImage(event)
 {
-  const reader1 = new FileReader();
-  const reader2 = new FileReader();
-  reader1.onloadend = function ()
+  const readerPreviewImage = new FileReader();
+  const readerDownloadImage = new FileReader();
+  readerPreviewImage.onloadend = function ()
   {
-    if (reader1.result === '')
+    if (readerPreviewImage.result === '')
     {
       return;
     }
@@ -229,21 +265,20 @@ function previewMainImage(event)
     }
     for (let image of MAIN_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + reader1.result + ")";
-      image.style.backgroundSize = "cover";
-      image.classList.add('upload__main-image_uploaded')
+      image.style.background = "url(" + readerPreviewImage.result + ")";
+      image.classList.add('upload__main-image_uploaded');
     }
   }
 
-  reader2.onloadend = function ()
+  readerDownloadImage.onloadend = function ()
   {
-    formProps['mainImage'] = btoa(reader2.result);
+    formProps['mainImage'] = btoa(readerDownloadImage.result);
   }
 
   if (event.target.files[0])
   {
-    reader1.readAsDataURL(event.target.files[0]);
-    reader2.readAsBinaryString(event.target.files[0]);
+    readerPreviewImage.readAsDataURL(event.target.files[0]);
+    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -262,23 +297,13 @@ function deleteMainImage()
   MAIN_IMAGE_ARRAY[1].classList.remove('upload__main-image_uploaded');
 }
 
-
-const previewImageEl = document.querySelector('#inputPreviewImage');
-previewImageEl.addEventListener('change', previewPreviewImage);
-
-
-const previewImageController = document.querySelector('#previewImageController');
-const removePreviewImageButton = document.querySelector('#removePreviewImageButton');
-removePreviewImageButton.addEventListener('click', deletePreviewImage);
-const previewImageRemark = document.querySelector('#previewImageRemark');
-
 function previewPreviewImage(event)
 {
-  const reader1 = new FileReader();
-  const reader2 = new FileReader();
-  reader1.onloadend = function ()
+  const readerPreviewImage = new FileReader();
+  const readerDownloadImage = new FileReader();
+  readerPreviewImage.onloadend = function ()
   {
-    if (reader1.result === '')
+    if (readerPreviewImage.result === '')
     {
       return;
     }
@@ -289,21 +314,21 @@ function previewPreviewImage(event)
     }
     for (let image of PREVIEW_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + reader1.result + ")";
+      image.style.background = "url(" + readerPreviewImage.result + ")";
       image.style.backgroundSize = "cover";
-      image.classList.add('upload__preview-image_uploaded')
+      image.classList.add('upload__preview-image_uploaded');
     }
   }
 
-  reader2.onloadend = function ()
+  readerDownloadImage.onloadend = function ()
   {
-    formProps['previewImage'] = btoa(reader2.result);
+    formProps['previewImage'] = btoa(readerDownloadImage.result);
   }
 
   if (event.target.files[0])
   {
-    reader1.readAsDataURL(event.target.files[0]);
-    reader2.readAsBinaryString(event.target.files[0]);
+    readerPreviewImage.readAsDataURL(event.target.files[0]);
+    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {
