@@ -31,9 +31,10 @@ func main() {
 
 	mux.HandleFunc("/admin", admin(client))
 	mux.HandleFunc("/api/post", createPost(client)).Methods(http.MethodPost)
+	mux.HandleFunc("/api/logout", logOut)
 
 	mux.HandleFunc("/login", login(client))
-	mux.HandleFunc("/auth", auth(client)).Methods("POST")
+	mux.HandleFunc("/api/login", auth(client)).Methods("POST")
 
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 

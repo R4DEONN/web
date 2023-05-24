@@ -2,18 +2,22 @@ package main
 
 import (
 	"database/sql"
-	"encoding/json"
 	"encoding/base64"
-	"os"
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
-	"time"
+	"os"
 	"strconv"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
+)
+
+const (
+	authCookieName = "uid"
 )
 
 type indexPage struct {
@@ -51,17 +55,17 @@ type postData struct {
 }
 
 type createPostRequest struct {
-	Title        string `json:"title"`
-	SubTitle     string `json:"subtitle"`
-	AuthorName   string `json:"authorName"`
+	Title            string `json:"title"`
+	SubTitle         string `json:"subtitle"`
+	AuthorName       string `json:"authorName"`
 	AuthorAvatarName string `json:"authorAvatarName"`
-	AuthorAvatar string `json:"authorAvatar"`
-	PublishDate  string `json:"publishDate"`
-	MainImageName string `json:"mainImageName""`
-	MainImage    string `json:"mainImage"`
+	AuthorAvatar     string `json:"authorAvatar"`
+	PublishDate      string `json:"publishDate"`
+	MainImageName    string `json:"mainImageName""`
+	MainImage        string `json:"mainImage"`
 	PreviewImageName string `json:"previewImageName"`
-	PreviewImage string `json:"previewImage"`
-	Content      string `json:"content"`
+	PreviewImage     string `json:"previewImage"`
+	Content          string `json:"content"`
 }
 
 type userData struct {
@@ -78,7 +82,7 @@ func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		main_post, err := featuredPosts(client)
+		mainPost, err := featuredPosts(client)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -91,7 +95,7 @@ func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		data := indexPage{
 			Title:           "Let's do it together.",
 			SubTitle:        "We travel the world in search of stories. Come along for the ride.",
-			FeaturedPosts:   main_post,
+			FeaturedPosts:   mainPost,
 			MostRecentPosts: post,
 		}
 
@@ -132,7 +136,7 @@ func post(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		ts, err := template.ParseFiles("pages/post.html")
 		if err != nil {
-			http.Error(w, "Inernal Server Error", 500)
+			http.Error(w, "Internal Server Error", 500)
 			log.Println(err.Error())
 			return
 		}
@@ -223,25 +227,10 @@ func postByID(client *sqlx.DB, postID int) (postData, error) {
 
 func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-	    const query = `
-        	        SELECT
-        	            1
-        	        FROM
-        	            user
-        	        WHERE
-        	            user_id = ?
-        	    `
-        cookie, err := r.Cookie("uid")
-        if err == nil {
-            _, err := client.Exec(query, cookie.Value)
-            if err != nil {
-                http.Redirect(w, r, "/login", http.StatusSeeOther)
-                return
-            }
-        } else {
-            http.Redirect(w, r, "/login", http.StatusSeeOther)
-            return
-        }
+		err := authByCookie(client, w, r)
+		if err != nil {
+			return
+		}
 
 		ts, err := template.ParseFiles("pages/admin.html")
 		if err != nil {
@@ -263,6 +252,11 @@ func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		err := authByCookie(db, w, r)
+		if err != nil {
+			return
+		}
+
 		const query = `
             INSERT INTO
                 post (
@@ -282,7 +276,7 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		decoder := json.NewDecoder(r.Body)
 		var post createPostRequest
-		err := decoder.Decode(&post)
+		err = decoder.Decode(&post)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Printf(err.Error())
@@ -291,65 +285,65 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		authorImage, err := base64.StdEncoding.DecodeString(post.AuthorAvatar)
 		if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 		mainImage, err := base64.StdEncoding.DecodeString(post.MainImage)
 		if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-            log.Printf(err.Error())
-        	return
-        }
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 		previewImage, err := base64.StdEncoding.DecodeString(post.PreviewImage)
 		if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        post.AuthorAvatarName = "static/img/" + post.AuthorAvatarName
-        post.MainImageName = "static/img/" + post.MainImageName
-        post.PreviewImageName = "static/img/" + post.PreviewImageName
+		post.AuthorAvatarName = "static/img/" + post.AuthorAvatarName
+		post.MainImageName = "static/img/" + post.MainImageName
+		post.PreviewImageName = "static/img/" + post.PreviewImageName
 
-        authorImageFile, err := os.Create(post.AuthorAvatarName)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
-        _, err = authorImageFile.Write(authorImage)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-            return
-        }
+		authorImageFile, err := os.Create(post.AuthorAvatarName)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+		_, err = authorImageFile.Write(authorImage)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        mainImageFile, err := os.Create(post.MainImageName)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
-        _, err = mainImageFile.Write(mainImage)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+		mainImageFile, err := os.Create(post.MainImageName)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+		_, err = mainImageFile.Write(mainImage)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        previewImageFile, err := os.Create(post.PreviewImageName)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
-        _, err = previewImageFile.Write(previewImage)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+		previewImageFile, err := os.Create(post.PreviewImageName)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
+		_, err = previewImageFile.Write(previewImage)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
 		_, err = db.Exec(
 			query,
@@ -362,11 +356,11 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			post.MainImageName,
 			post.Content,
 		)
-        if err != nil {
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
 		w.WriteHeader(http.StatusAccepted)
 	}
@@ -374,7 +368,7 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-	    const query = `
+		const query = `
         	        SELECT
         	            1
         	        FROM
@@ -382,14 +376,14 @@ func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
         	        WHERE
         	            user_id = ?
         	    `
-        cookie, err := r.Cookie("uid")
-        if err == nil {
-            _, err := client.Exec(query, cookie.Value)
-            if err == nil {
-                http.Redirect(w, r, "/admin", http.StatusSeeOther)
-                return
-            }
-        }
+		cookie, err := r.Cookie(authCookieName)
+		if err == nil {
+			_, err := client.Exec(query, cookie.Value)
+			if err == nil {
+				http.Redirect(w, r, "/admin", http.StatusSeeOther)
+				return
+			}
+		}
 
 		ts, err := template.ParseFiles("pages/auth/logination.html")
 		if err != nil {
@@ -421,7 +415,7 @@ func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-        const query = `
+		const query = `
                     SELECT
                       user_id
                     FROM
@@ -433,28 +427,76 @@ func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		var id int
 		err = db.QueryRow(query, user.Email, user.Password).Scan(&id)
 		if err != nil {
-        	if err == sql.ErrNoRows {
-            	http.Error(w, "User not found", http.StatusUnauthorized)
-                log.Printf(err.Error())
-        	    return
-        	}
-        	http.Error(w, "Internal Server Error", 500)
-        	log.Printf(err.Error())
-        	return
-        }
+			if err == sql.ErrNoRows {
+				http.Error(w, "Incorrect password or email", http.StatusUnauthorized)
+				log.Printf(err.Error())
+				return
+			}
+			http.Error(w, "Internal Server Error", 500)
+			log.Printf(err.Error())
+			return
+		}
 
-        cookie := http.Cookie{
-            Name:     "uid",
-            Value:    strconv.Itoa(id),
-            Expires:   time.Now().AddDate(0, 0, 3),
-            HttpOnly: true,
-            Secure:   true,
-            SameSite: http.SameSiteLaxMode,
-        }
+		cookie := http.Cookie{
+			Name:    authCookieName,
+			Value:   strconv.Itoa(id),
+			Path:    "/",
+			Expires: time.Now().AddDate(0, 0, 1),
+		}
 
-        http.SetCookie(w, &cookie)
+		http.SetCookie(w, &cookie)
 
 		w.WriteHeader(http.StatusAccepted)
 		return
 	}
+}
+
+func authByCookie(db *sqlx.DB, w http.ResponseWriter, r *http.Request) error {
+	cookie, err := r.Cookie(authCookieName)
+	if err != nil {
+		if err == http.ErrNoCookie {
+			http.Error(w, "No auth cookie passed", 401)
+			log.Println(err)
+			return err
+		}
+		http.Error(w, "Internal Server Error", 500)
+		log.Println(err)
+		return err
+	}
+
+	userIDStr := cookie.Value
+
+	const query = `
+        	        SELECT
+        	            1
+        	        FROM
+        	            user
+        	        WHERE
+        	            user_id = ?
+        	    `
+	_, err = db.Exec(query, userIDStr)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			http.Error(w, "Incorrect cookie", http.StatusUnauthorized)
+			log.Printf(err.Error())
+			return err
+		}
+		http.Error(w, "Internal Server Error", 500)
+		log.Printf(err.Error())
+		return err
+	}
+
+	return nil
+}
+
+func logOut(w http.ResponseWriter, r *http.Request) {
+	cookie := http.Cookie{
+		Name:    authCookieName,
+		Path:    "/",
+		Expires: time.Now().AddDate(0, 0, -1),
+	}
+
+	http.SetCookie(w, &cookie)
+
+	w.WriteHeader(http.StatusAccepted)
 }

@@ -30,7 +30,7 @@ initListeners();
 
 function initListeners()
 {
-  logOutButton.addEventListener('click', () => { window.location = '/login' })
+  logOutButton.addEventListener('click', logOut)
   for (let el of textInputElements)
   {
     el.addEventListener('input', changeStyle);
@@ -136,6 +136,15 @@ function validateQueryParams(query)
     }
   }
   return errors;
+}
+
+async function logOut()
+{
+  let response = await fetch('api/logout');
+  if (response.ok)
+  {
+    window.location = '/home';
+  }
 }
 
 function changeStyle(event)
