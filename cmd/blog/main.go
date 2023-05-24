@@ -2,18 +2,28 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
+	"github.com/joho/godotenv"
 )
 
 const (
 	host         = "localhost:3030"
 	dbDriverName = "mysql"
 )
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Print("No .env file found")
+	}
+}
 
 func main() {
 	db, err := openDB()
@@ -46,5 +56,9 @@ func main() {
 }
 
 func openDB() (*sql.DB, error) {
-	return sql.Open(dbDriverName, "root:Vuzohe67@tcp(localhost:3306)/blog?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true")
+	appDatabaseDSN, exists := os.LookupEnv("APP_DATABASE_DSN")
+	if !exists {
+		return nil, fmt.Errorf("APP_DATABASE_DSN environment variable not found")
+	}
+	return sql.Open(dbDriverName, appDatabaseDSN)
 }
