@@ -266,11 +266,6 @@
     background: #FCFCFC;
 }
 
-@media screen and (min-width: 480px)
-{
-    
-}
-
 @media screen and (min-width: 540px)
 {
     .tag-block
@@ -298,6 +293,13 @@
 
 @media screen and (min-width: 660px)
 {
+    .top-block
+    {
+        padding: 163px 0 100px;
+        max-height: 100%;
+        max-width: 100%;
+    }
+
     .tag-block
     {
         max-width: 540px;
@@ -310,9 +312,7 @@
 {
     .top-block
     {
-        padding: 163px 0 171px;
-        max-height: 100%;
-        max-width: 100%;
+        padding: 163px 0 130px;
     }
 
     .tag-block
@@ -329,22 +329,17 @@
     }
 }
 
-@media screen and (min-width: 820px)
-{
-
-}
-
 @media screen and (min-width: 880px)
 {
+    .top-block
+    {
+        padding: 163px 0 171px;
+    }
+
     .main-block__post
     {
         max-width: 260px;
     }
-}
-
-@media screen and (min-width: 940px)
-{
-
 }
 
 @media screen and (min-width: 960px)
@@ -358,14 +353,4 @@
     {
         max-width: 940px;
     }
-}
-
-@media screen and (min-width: 1024px)
-{
-
-}
-
-@media screen and (min-width: 1366px)
-{
-
 }
