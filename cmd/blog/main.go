@@ -33,23 +33,23 @@ func main() {
 
 	client := sqlx.NewDb(db, dbDriverName)
 
-	mux := mux.NewRouter()
+	router := mux.NewRouter()
 
-	mux.HandleFunc("/home", index(client))
+	router.HandleFunc("/home", index(client))
 
-	mux.HandleFunc("/post/{postID}", post(client))
+	router.HandleFunc("/post/{postID}", post(client))
 
-	mux.HandleFunc("/admin", admin(client))
-	mux.HandleFunc("/api/post", createPost(client)).Methods(http.MethodPost)
-	mux.HandleFunc("/api/logout", logOut)
+	router.HandleFunc("/admin", admin(client))
+	router.HandleFunc("/api/post", createPost(client)).Methods(http.MethodPost)
+	router.HandleFunc("/api/logout", logOut)
 
-	mux.HandleFunc("/login", login(client))
-	mux.HandleFunc("/api/login", auth(client)).Methods("POST")
+	router.HandleFunc("/login", login(client))
+	router.HandleFunc("/api/login", auth(client)).Methods("POST")
 
-	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	log.Println("Start server " + host)
-	err = http.ListenAndServe(host, mux)
+	err = http.ListenAndServe(host, router)
 	if err != nil {
 		log.Fatal(err)
 	}
