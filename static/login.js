@@ -105,7 +105,6 @@ form.onsubmit = async e =>
   if (isErrors)
   {
     formErrorTextEl.innerHTML = 'A-Ah! Check all fields.';
-    console.log('1')
     if (!formErrorEl.classList.contains('appearance'))
     {
       formErrorEl.classList.add('appearance');

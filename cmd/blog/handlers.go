@@ -61,7 +61,7 @@ type createPostRequest struct {
 	AuthorAvatarName string `json:"authorAvatarName"`
 	AuthorAvatar     string `json:"authorAvatar"`
 	PublishDate      string `json:"publishDate"`
-	MainImageName    string `json:"mainImageName""`
+	MainImageName    string `json:"mainImageName"`
 	MainImage        string `json:"mainImage"`
 	PreviewImageName string `json:"previewImageName"`
 	PreviewImage     string `json:"previewImage"`
@@ -229,6 +229,7 @@ func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		err := authByCookie(client, w, r)
 		if err != nil {
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}
 
@@ -455,7 +456,6 @@ func authByCookie(db *sqlx.DB, w http.ResponseWriter, r *http.Request) error {
 	cookie, err := r.Cookie(authCookieName)
 	if err != nil {
 		if err == http.ErrNoCookie {
-			http.Error(w, "No auth cookie passed", 401)
 			log.Println(err)
 			return err
 		}

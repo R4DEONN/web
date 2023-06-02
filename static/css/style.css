@@ -1,6 +1,6 @@
 .top-block 
 {
-    padding: 126px 0 70px;
+    padding: 126px 15px 70px;
     max-height: 100%;
     max-width: 100%;
     background: url(../img/header.png);
@@ -184,6 +184,7 @@
     border-radius: 50%;
     margin-right: 10px;
     width: 26px;
+    height: 26px;
 }
 
 .sub-menu__sign 
@@ -234,6 +235,7 @@
     max-height: 150px;
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .post__info 

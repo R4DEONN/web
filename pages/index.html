@@ -4,14 +4,24 @@
     <meta charset="UTF-8" />
     <title>{{ .Title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/static/home.js" defer></script>
     <link rel="stylesheet" href="../static/css/main.css" />
     <link rel="stylesheet" href="../static/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Oxygen&family=Lora&family=Roboto&display=swap" rel="stylesheet" />
   </head>
-  <body class="page">
+  <body id="body" class="page">
     <header class="header">
       <span class="header__logo">Escape</span>
-      <nav class="header__nav">
+      <div class="header__burger-menu">
+        <img id="burger" alt="burger" class="header__burger" src="/static/img/burger.svg" />
+        <nav id="burgerNav" class="header__burger-navigation">
+          <a href="#" class="header__ref header__ref_color_black">Home</a>
+          <a href="#" class="header__ref header__ref_color_black">Categories</a>
+          <a href="#" class="header__ref header__ref_color_black">About</a>
+          <a href="#" class="header__ref header__ref_color_black">Contact</a>
+        </nav>
+      </div>
+      <nav id="headerNav" class="header__nav">
         <a href="#" class="header__ref">Home</a>
         <a href="#" class="header__ref">Categories</a>
         <a href="#" class="header__ref">About</a>
@@ -78,7 +88,7 @@
       <form class="bottom-block__form">
         <h2 class="bottom-block__form-title">Stay in Touch</h2>
         <div class="bottom-block__form-info">
-          <input class="bottom-block__email" type="text" name="useremail" placeholder="Enter your email addres" />
+          <input class="bottom-block__email" type="text" name="userEmail" placeholder="Enter your email address" />
           <input class="bottom-block__submit" type="submit" name="submit" value="Submit" />
         </div>
       </form>

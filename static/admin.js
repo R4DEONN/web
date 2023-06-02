@@ -73,7 +73,7 @@ form.onsubmit = async e =>
 
   for (let element of form.elements)
   {
-    if (element.type == 'submit')
+    if (element.type === 'submit')
     {
       continue;
     }
@@ -227,6 +227,7 @@ function previewAuthorImage(event)
     for (let image of AVATAR_ARRAY)
     {
       image.style.background = "url(" + readerPreviewImage.result + ")";
+      console.log(readerPreviewImage);
       image.style.backgroundSize = "cover";
     }
   }
