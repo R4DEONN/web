@@ -122,7 +122,7 @@ function validateQueryParams(query)
     {
       errors = true;
       const lastChild = element.parentNode.lastChild;
-      if (lastChild.nodeName == 'SPAN' && lastChild.classList.contains('form-row__error-message'))
+      if (lastChild.nodeName === 'SPAN' && lastChild.classList.contains('form-row__error-message'))
       {
         continue;
       }

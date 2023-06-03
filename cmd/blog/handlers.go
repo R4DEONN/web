@@ -240,9 +240,7 @@ func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var data int
-
-		err = ts.Execute(w, data)
+		err = ts.Execute(w, nil)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Printf(err.Error())
@@ -393,9 +391,7 @@ func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var data int
-
-		err = ts.Execute(w, data)
+		err = ts.Execute(w, nil)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Printf(err.Error())
@@ -489,7 +485,7 @@ func authByCookie(db *sqlx.DB, w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func logOut(w http.ResponseWriter, r *http.Request) {
+func logOut(w http.ResponseWriter, _ *http.Request) {
 	cookie := http.Cookie{
 		Name:    authCookieName,
 		Path:    "/",
