@@ -233,6 +233,7 @@
 .post__image 
 {
     max-height: 150px;
+    min-height: 150px;
     height: 100%;
     width: 100%;
     object-fit: cover;

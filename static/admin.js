@@ -86,7 +86,7 @@ form.onsubmit = async e =>
       formProps[element.name + 'Name'] = element.value.replace('C:\\fakepath\\', '');
     }
   }
-  const json = JSON.stringify(formProps, null, '\t');
+  const json = JSON.stringify(formProps);
   console.log(json);
 
   let response = await fetch('/api/post', {
@@ -213,34 +213,27 @@ function previewAuthorName(event)
 function previewAuthorImage(event)
 {
   const readerPreviewImage = new FileReader();
-  const readerDownloadImage = new FileReader();
   readerPreviewImage.onloadend = function ()
   {
     if (readerPreviewImage.result === '')
     {
       return;
     }
-
+    formProps['authorAvatar'] = readerPreviewImage.result.slice(readerPreviewImage.result.lastIndexOf(',') + 1);
     avatarCameraImg.classList.remove('hidden');
     uploadAvatarButtonText.innerHTML = 'Upload New';
     removeAvatarButton.classList.remove('hidden');
     for (let image of AVATAR_ARRAY)
     {
-      image.style.background = "url(" + readerPreviewImage.result + ")";
-      console.log(readerPreviewImage);
+      image.style.background = "url(" + readerPreviewImage.result + ") no-repeat";
       image.style.backgroundSize = "cover";
     }
   }
 
-  readerDownloadImage.onloadend = function ()
-  {
-    formProps['authorAvatar'] = btoa(readerDownloadImage.result);
-  }
 
   if (event.target.files[0])
   {
     readerPreviewImage.readAsDataURL(event.target.files[0]);
-    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -261,13 +254,15 @@ function deleteAvatar()
 function previewMainImage(event)
 {
   const readerPreviewImage = new FileReader();
-  const readerDownloadImage = new FileReader();
   readerPreviewImage.onloadend = function ()
   {
     if (readerPreviewImage.result === '')
     {
       return;
     }
+
+    formProps['mainImage'] = readerPreviewImage.result.slice(readerPreviewImage.result.lastIndexOf(',') + 1);
+
     if (mainImageController.classList.contains('hidden'))
     {
       mainImageRemark.classList.add('hidden');
@@ -275,20 +270,15 @@ function previewMainImage(event)
     }
     for (let image of MAIN_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + readerPreviewImage.result + ")";
+      image.style.background = "url(" + readerPreviewImage.result + ") no-repeat";
+      image.style.backgroundSize = "cover";
       image.classList.add('upload__main-image_uploaded');
     }
-  }
-
-  readerDownloadImage.onloadend = function ()
-  {
-    formProps['mainImage'] = btoa(readerDownloadImage.result);
   }
 
   if (event.target.files[0])
   {
     readerPreviewImage.readAsDataURL(event.target.files[0]);
-    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {
@@ -310,13 +300,15 @@ function deleteMainImage()
 function previewPreviewImage(event)
 {
   const readerPreviewImage = new FileReader();
-  const readerDownloadImage = new FileReader();
   readerPreviewImage.onloadend = function ()
   {
     if (readerPreviewImage.result === '')
     {
       return;
     }
+
+    formProps['previewImage'] = readerPreviewImage.result.slice(readerPreviewImage.result.lastIndexOf(',') + 1);
+
     if (previewImageController.classList.contains('hidden'))
     {
       previewImageRemark.classList.add('hidden');
@@ -324,21 +316,15 @@ function previewPreviewImage(event)
     }
     for (let image of PREVIEW_IMAGE_ARRAY)
     {
-      image.style.background = "url(" + readerPreviewImage.result + ")";
+      image.style.background = "url(" + readerPreviewImage.result + ") no-repeat";
       image.style.backgroundSize = "cover";
       image.classList.add('upload__preview-image_uploaded');
     }
   }
 
-  readerDownloadImage.onloadend = function ()
-  {
-    formProps['previewImage'] = btoa(readerDownloadImage.result);
-  }
-
   if (event.target.files[0])
   {
     readerPreviewImage.readAsDataURL(event.target.files[0]);
-    readerDownloadImage.readAsBinaryString(event.target.files[0]);
   }
   else
   {

@@ -107,6 +107,7 @@ func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Println("Request completed successfully")
+		return
 	}
 }
 
@@ -149,6 +150,7 @@ func post(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Println("Request completed successfully")
+		return
 	}
 }
 
@@ -246,6 +248,8 @@ func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			log.Printf(err.Error())
 			return
 		}
+
+		return
 	}
 }
 
@@ -362,6 +366,7 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.WriteHeader(http.StatusAccepted)
+		return
 	}
 }
 
@@ -398,6 +403,7 @@ func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		return
 	}
 }
 
@@ -422,7 +428,7 @@ func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
                 `
 
 		var id int
-		err = db.QueryRow(query, user.Email, user.Password).Scan(&id)
+		err = db.Get(&id, query, user.Email, user.Password)
 		if err != nil {
 			if err == sql.ErrNoRows {
 				http.Error(w, "Incorrect password or email", http.StatusUnauthorized)
@@ -495,4 +501,5 @@ func logOut(w http.ResponseWriter, _ *http.Request) {
 	http.SetCookie(w, &cookie)
 
 	w.WriteHeader(http.StatusAccepted)
+	return
 }
