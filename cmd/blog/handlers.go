@@ -77,7 +77,7 @@ func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ts, err := template.ParseFiles("pages/index.html")
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Println(err.Error())
 			return
 		}
@@ -101,7 +101,7 @@ func index(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		err = ts.Execute(w, data)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Println(err.Error())
 			return
 		}
@@ -125,19 +125,19 @@ func post(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		post, err := postByID(client, postID)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				http.Error(w, "Post not found", 404)
+				http.Error(w, "Post not found", http.StatusNotFound)
 				log.Println(err)
 				return
 			}
 
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Println(err)
 			return
 		}
 
 		ts, err := template.ParseFiles("pages/post.html")
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Println(err.Error())
 			return
 		}
@@ -237,14 +237,14 @@ func admin(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		ts, err := template.ParseFiles("pages/admin.html")
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 
 		err = ts.Execute(w, nil)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -281,26 +281,26 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		var post createPostRequest
 		err = decoder.Decode(&post)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 
 		authorImage, err := base64.StdEncoding.DecodeString(post.AuthorAvatar)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 		mainImage, err := base64.StdEncoding.DecodeString(post.MainImage)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 		previewImage, err := base64.StdEncoding.DecodeString(post.PreviewImage)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -311,39 +311,39 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		authorImageFile, err := os.Create(post.AuthorAvatarName)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 		_, err = authorImageFile.Write(authorImage)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 
 		mainImageFile, err := os.Create(post.MainImageName)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 		_, err = mainImageFile.Write(mainImage)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 
 		previewImageFile, err := os.Create(post.PreviewImageName)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 		_, err = previewImageFile.Write(previewImage)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -360,7 +360,7 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			post.Content,
 		)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -391,14 +391,14 @@ func login(client *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		ts, err := template.ParseFiles("pages/auth/logination.html")
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
 
 		err = ts.Execute(w, nil)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -413,7 +413,7 @@ func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		var user userData
 		err := decoder.Decode(&user)
 		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -435,7 +435,7 @@ func auth(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 				log.Printf(err.Error())
 				return
 			}
-			http.Error(w, "Internal Server Error", 500)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			log.Printf(err.Error())
 			return
 		}
@@ -461,7 +461,7 @@ func authByCookie(db *sqlx.DB, w http.ResponseWriter, r *http.Request) error {
 			log.Println(err)
 			return err
 		}
-		http.Error(w, "Internal Server Error", 500)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		log.Println(err)
 		return err
 	}
@@ -483,7 +483,7 @@ func authByCookie(db *sqlx.DB, w http.ResponseWriter, r *http.Request) error {
 			log.Printf(err.Error())
 			return err
 		}
-		http.Error(w, "Internal Server Error", 500)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		log.Printf(err.Error())
 		return err
 	}

@@ -44,7 +44,7 @@ func main() {
 	router.HandleFunc("/api/logout", logOut)
 
 	router.HandleFunc("/login", login(client))
-	router.HandleFunc("/api/login", auth(client)).Methods("POST")
+	router.HandleFunc("/api/login", auth(client)).Methods(http.MethodPost)
 
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
